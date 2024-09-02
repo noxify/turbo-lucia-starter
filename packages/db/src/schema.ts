@@ -1,13 +1,5 @@
 import { relations, sql } from "drizzle-orm"
-import {
-  index,
-  pgTable,
-  primaryKey,
-  text,
-  timestamp,
-  uuid,
-  varchar,
-} from "drizzle-orm/pg-core"
+import { pgTable, text, timestamp, uuid, varchar } from "drizzle-orm/pg-core"
 import { createInsertSchema } from "drizzle-zod"
 import { z } from "zod"
 
@@ -60,24 +52,15 @@ export const Session = pgTable("session", {
   userAgent: text("user_agent"),
 })
 
-export const Account = pgTable(
-  "account",
-  {
-    providerId: varchar("provider_id", { length: 255 }).notNull(),
-    providerUserId: varchar("provider_user_id", { length: 255 }).notNull(),
-    userId: varchar("user_id", {
-      length: 255,
-    })
-      .notNull()
-      .references(() => User.id),
-  },
-  (account) => ({
-    compoundKey: primaryKey({
-      columns: [account.providerId, account.providerUserId],
-    }),
-    userIdIdx: index("userId_idx").on(account.userId),
-  }),
-)
+export const Account = pgTable("account", {
+  providerId: varchar("provider_id", { length: 255 }).notNull(),
+  providerUserId: varchar("provider_user_id", { length: 255 }).notNull(),
+  userId: varchar("user_id", {
+    length: 255,
+  })
+    .notNull()
+    .references(() => User.id),
+})
 
 export const SessionRelations = relations(Session, ({ one }) => ({
   user: one(User, {
@@ -86,6 +69,9 @@ export const SessionRelations = relations(Session, ({ one }) => ({
   }),
 }))
 
-export const UserRelations = relations(User, ({ many }) => ({
-  accounts: many(Account),
+export const AccountRelations = relations(Account, ({ one }) => ({
+  user: one(User, {
+    fields: [Account.userId],
+    references: [User.id],
+  }),
 }))

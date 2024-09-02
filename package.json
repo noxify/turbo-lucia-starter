@@ -11,6 +11,8 @@
     "dev:next": "turbo watch dev -F @acme/nextjs...",
     "clean": "git clean -xdf node_modules",
     "clean:workspaces": "turbo run clean",
+    "db:up": "docker compose -p turbo up -d ",
+    "db:down": "docker compose -p turbo down --remove-orphans -v",
     "db:generate": "pnpm -F db generate",
     "db:migrate": "pnpm -F db migrate",
     "db:push": "turbo -F @acme/db push",
