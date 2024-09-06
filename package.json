@@ -2,9 +2,9 @@
   "name": "t3-turbo-lucia",
   "private": true,
   "engines": {
-    "node": ">=20.12.0"
+    "node": ">=22"
   },
-  "packageManager": "pnpm@9.4.0",
+  "packageManager": "pnpm@9.9.0",
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo watch dev",
@@ -32,11 +32,11 @@
   },
   "devDependencies": {
     "@acme/prettier-config": "workspace:*",
-    "@turbo/gen": "2.0.6",
-    "prettier": "3.3.2",
-    "sherif": "0.9.0",
-    "turbo": "2.0.6",
-    "typescript": "5.5.3"
+    "@turbo/gen": "2.1.1",
+    "prettier": "3.3.3",
+    "sherif": "1.0.0",
+    "turbo": "2.1.1",
+    "typescript": "5.5.4"
   },
   "prettier": "@acme/prettier-config"
 }

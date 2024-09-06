@@ -13,7 +13,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon --watch ./src/lang --ext json --exec \"pnpm run generate\"",
-    "clean": "rm -rf .turbo node_modules",
+    "clean": "git clean -xdf .cache .turbo node_modules",
     "format": "prettier --check . '!src/generated/**' --ignore-path ../../.gitignore",
     "lint": "eslint",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false",
@@ -28,13 +28,13 @@
     "@acme/prettier-config": "workspace:*",
     "@acme/tailwind-config": "workspace:*",
     "@acme/tsconfig": "workspace:*",
-    "@types/react": "18.3.3",
-    "eslint": "9.6.0",
+    "@types/react": "18.3.5",
+    "eslint": "9.9.1",
     "nodemon": "3.1.4",
-    "prettier": "3.3.2",
+    "prettier": "3.3.3",
     "react": "18.3.1",
-    "tsx": "4.16.2",
-    "typescript": "5.5.3"
+    "tsx": "4.19.0",
+    "typescript": "5.5.4"
   },
   "prettier": "@acme/prettier-config"
 }

@@ -4,34 +4,42 @@
   "version": "0.1.0",
   "type": "module",
   "exports": {
-    ".": "./src/index.ts",
-    "./*": [
-      "./src/*.tsx",
-      "./src/*.ts"
-    ]
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "default": "./src/index.ts"
+    },
+    "./*": {
+      "types": "./dist/src/*.d.ts",
+      "default": [
+        "./src/*.ts",
+        "./src/*.tsx"
+      ]
+    }
   },
   "license": "MIT",
   "scripts": {
-    "clean": "rm -rf .turbo node_modules",
+    "build": "tsc",
+    "clean": "git clean -xdf .cache .turbo node_modules",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
+    "dev": "tsc",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false",
-    "ui-add": "shadcn-ui add && prettier src --write --list-different"
+    "ui-add": "pnpm dlx shadcn@latest add && prettier src --write --list-different"
   },
   "dependencies": {
     "@acme/locales": "workspace:*",
-    "@hookform/resolvers": "3.7.0",
+    "@hookform/resolvers": "3.9.0",
     "@radix-ui/react-dropdown-menu": "2.1.1",
     "@radix-ui/react-icons": "1.3.0",
     "@radix-ui/react-label": "2.1.0",
     "@radix-ui/react-slot": "1.1.0",
     "@radix-ui/react-toast": "^1.2.1",
     "class-variance-authority": "0.7.0",
-    "lucide-react": "0.400.0",
+    "lucide-react": "0.439.0",
     "next-themes": "0.3.0",
-    "react-hook-form": "7.52.1",
+    "react-hook-form": "7.53.0",
     "sonner": "1.5.0",
-    "tailwind-merge": "2.3.0",
+    "tailwind-merge": "2.5.2",
     "tailwindcss-animate": "1.0.7"
   },
   "devDependencies": {
@@ -39,13 +47,12 @@
     "@acme/prettier-config": "workspace:*",
     "@acme/tailwind-config": "workspace:*",
     "@acme/tsconfig": "workspace:*",
-    "@types/react": "18.3.3",
-    "eslint": "9.6.0",
-    "prettier": "3.3.2",
+    "@types/react": "18.3.5",
+    "eslint": "9.9.1",
+    "prettier": "3.3.3",
     "react": "18.3.1",
-    "shadcn-ui": "0.8.0",
-    "tailwindcss": "3.4.4",
-    "typescript": "5.5.3",
+    "tailwindcss": "3.4.10",
+    "typescript": "5.5.4",
     "zod": "3.23.8"
   },
   "peerDependencies": {

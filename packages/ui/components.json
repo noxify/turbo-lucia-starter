@@ -9,9 +9,12 @@
     "baseColor": "zinc",
     "cssVariables": true
   },
+
   "aliases": {
+    "components": "src",
     "utils": "@acme/ui",
-    "components": "src/",
-    "ui": "src/"
+    "ui": "src",
+    "lib": "src/lib",
+    "hooks": "src/hooks"
   }
 }
