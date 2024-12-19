@@ -1,42 +1,60 @@
 {
-  "name": "t3-turbo-lucia",
+  "name": "turbo-lucia-starter",
   "private": true,
   "engines": {
-    "node": ">=20.12.0"
+    "node": ">=22.11"
   },
-  "packageManager": "pnpm@9.4.0",
+  "packageManager": "pnpm@9.15.0",
   "scripts": {
     "build": "turbo run build",
-    "dev": "turbo watch dev",
-    "dev:next": "turbo watch dev -F @acme/nextjs...",
+    "preview": "turbo run start",
+    "dev": "turbo dev",
     "clean": "git clean -xdf node_modules",
     "clean:workspaces": "turbo run clean",
-    "db:up": "docker compose -p turbo up -d ",
-    "db:down": "docker compose -p turbo down --remove-orphans -v",
+    "clean:cache": "turbo run clean:cache",
+    "clean:dist": "turbo run clean:dist",
     "db:generate": "pnpm -F db generate",
     "db:migrate": "pnpm -F db migrate",
-    "db:push": "turbo -F @acme/db push",
-    "db:studio": "turbo -F @acme/db studio",
+    "db:push": "pnpm -F db push",
+    "db:seed": "pnpm -F db seed",
+    "db:studio": "pnpm -F db studio",
     "typecheck": "turbo run typecheck",
-    "format": "turbo run format --continue -- --cache --cache-location node_modules/.cache/.prettiercache",
-    "format:fix": "turbo run format --continue -- --write --cache --cache-location node_modules/.cache/.prettiercache",
-    "lint": "turbo run lint --continue -- --cache --cache-location node_modules/.cache/.eslintcache",
-    "lint:fix": "turbo run lint --continue -- --fix --cache --cache-location node_modules/.cache/.eslintcache",
+    "format": "turbo run format --continue -- --cache --cache-location .cache/.prettiercache",
+    "format:fix": "turbo run format --continue -- --write --cache --cache-location .cache/.prettiercache",
+    "lint": "turbo run lint --continue -- --cache --cache-location .cache/.eslintcache",
+    "lint:fix": "turbo run lint --continue -- --fix --cache --cache-location .cache/.eslintcache",
     "lint:ws": "sherif",
     "lint:ws:fix": "sherif --fix",
     "ui-add": "turbo run ui-add",
     "deps:check": "pnpm outdated -r",
     "deps:update": "pnpm update -i -L -r",
-    "lang:gen": "pnpm -F locales generate",
-    "postinstall": "pnpm lint:ws"
+    "postinstall": "pnpm lint:ws",
+    "test": "vitest --project=unit",
+    "test:ui": "vitest --ui",
+    "prune": "turbo prune --docker",
+    "prepare_test": "turbo run build --filter @acme/* --filter !./apps/*",
+    "turbo": "turbo",
+    "test:e2e:frontend": "pnpm -F frontend test:e2e",
+    "playwright:init": "pnpm -F playwright test:init"
   },
   "devDependencies": {
     "@acme/prettier-config": "workspace:*",
-    "@turbo/gen": "2.0.6",
-    "prettier": "3.3.2",
-    "sherif": "0.9.0",
-    "turbo": "2.0.6",
-    "typescript": "5.5.3"
+    "@vitest/coverage-v8": "2.1.8",
+    "prettier": "3.4.2",
+    "sherif": "1.1.1",
+    "tailwindcss": "3.4.17",
+    "turbo": "2.3.3",
+    "typescript": "5.7.2",
+    "vitest": "2.1.8"
   },
-  "prettier": "@acme/prettier-config"
+  "prettier": "@acme/prettier-config",
+  "pnpm": {
+    "overrides": {
+      "minimist@<0.2.1": ">=0.2.1",
+      "minimist@<0.2.4": ">=0.2.4",
+      "axios@<0.28.0": ">=0.28.0",
+      "cookie@<0.7.0": ">=0.7.0",
+      "dset@<3.1.4": ">=3.1.4"
+    }
+  }
 }

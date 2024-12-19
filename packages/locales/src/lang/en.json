@@ -1,34 +1,145 @@
 {
   "auth": {
-    "signout": "Sign out",
-    "headline": "Sign in with",
-    "title": "Sign in",
-    "page_title": "Sign in"
-  },
-  "welcome": "Hello <span class=\"font-medium\">{name}</span>!",
-  "common": {
-    "delete": "Delete",
-    "create": "Create"
-  },
-  "error": {
-    "not_authorized": "You're not logged in."
-  },
-  "posts": {
-    "delete": {
-      "failed": "Failed to delete the post."
+    "error": {
+      "callback_error": "We weren't able to complete the sign in. Please try it again.",
+      "code_error": "We weren't able to complete the sign in. Please try it again.",
+      "invalid_provider": "This OAuth provider isn't supported. Please use a different provider.",
+      "title": "Unable to sign in",
+      "unknown_error": "Something went totally wrong. Please try it again."
     },
-    "no_records": "No posts.",
-    "create": {
-      "failed": "Failed to create the post."
+    "headline": "Sign in with",
+    "page_title": "Sign in",
+    "signin_button": "Sign in with",
+    "signout": "Sign out",
+    "title": "Sign in"
+  },
+
+  "dashboard": {
+    "title": "Dashboard"
+  },
+
+  "errors": {
+    "no_permission": "You are not authorized to perform this action.",
+    "not_authorized": "You're not logged in.",
+    "record_not_found": "Record not found"
+  },
+
+  "welcome": "Welcome <user></user>",
+  "zod": {
+    "custom_validations": {},
+    "errors": {
+      "custom": "Invalid input",
+      "invalid_arguments": "Invalid function arguments",
+      "invalid_date": "Invalid date",
+      "invalid_enum_value": "Invalid enum value. Expected {- options}, received '{received}'",
+      "invalid_intersection_types": "Intersection results could not be merged",
+      "invalid_literal": "Invalid literal value, expected {expected}",
+      "invalid_return_type": "Invalid function return type",
+      "invalid_string": {
+        "cuid": "Invalid {validation}",
+        "datetime": "Invalid {validation}",
+        "email": "Invalid {validation}",
+        "endsWith": "Invalid input: must end with \"{endsWith}\"",
+        "regex": "Invalid",
+        "startsWith": "Invalid input: must start with \"{startsWith}\"",
+        "url": "Invalid {validation}",
+        "uuid": "Invalid {validation}"
+      },
+      "invalid_type": "Expected {expected}, received {received}",
+      "invalid_type_received_null": "Required",
+      "invalid_type_received_undefined": "Required",
+      "invalid_union": "Invalid input",
+      "invalid_union_discriminator": "Invalid discriminator value. Expected {- options}",
+      "not_finite": "Number must be finite",
+      "not_multiple_of": "Number must be a multiple of {multipleOf}",
+      "too_big": {
+        "array": {
+          "exact": "{path} must contain exactly {maximum} element(s)",
+          "inclusive": "{path} must contain at most {maximum} element(s)",
+          "not_inclusive": "{path} must contain less than {maximum} element(s)"
+        },
+        "date": {
+          "exact": "Date must be exactly {- maximum, datetime}",
+          "inclusive": "Date must be smaller than or equal to {- maximum, datetime}",
+          "not_inclusive": "Date must be smaller than {- maximum, datetime}"
+        },
+        "number": {
+          "exact": "Number must be exactly {maximum}",
+          "inclusive": "Number must be less than or equal to {maximum}",
+          "not_inclusive": "Number must be less than {maximum}"
+        },
+        "set": {
+          "exact": "Invalid input",
+          "inclusive": "Invalid input",
+          "not_inclusive": "Invalid input"
+        },
+        "string": {
+          "exact": "{path} must contain exactly {maximum} character(s)",
+          "inclusive": "{path} must contain at most {maximum} character(s)",
+          "not_inclusive": "{path} must contain under {maximum} character(s)"
+        }
+      },
+      "too_small": {
+        "array": {
+          "exact": "{path} must contain exactly {minimum} element(s)",
+          "inclusive": "{path} must contain at least {minimum} element(s)",
+          "not_inclusive": "{path} must contain more than {minimum} element(s)"
+        },
+        "date": {
+          "exact": "Date must be exactly {- minimum, datetime}",
+          "inclusive": "Date must be greater than or equal to {- minimum, datetime}",
+          "not_inclusive": "Date must be greater than {- minimum, datetime}"
+        },
+        "number": {
+          "exact": "Number must be exactly {minimum}",
+          "inclusive": "Number must be greater than or equal to {minimum}",
+          "not_inclusive": "Number must be greater than {minimum}"
+        },
+        "set": {
+          "exact": "Invalid input",
+          "inclusive": "Invalid input",
+          "not_inclusive": "Invalid input"
+        },
+        "string": {
+          "exact": "{path} must contain exactly {minimum} character(s)",
+          "inclusive": "{path} must contain at least {minimum} character(s)",
+          "not_inclusive": "{path} must contain over {minimum} character(s)"
+        }
+      },
+      "unrecognized_keys": "Unrecognized key(s) in object: {- keys}"
     },
     "form": {
-      "title": "Title",
-      "content": "Content"
+      "field": "validation"
+    },
+    "types": {
+      "array": "array",
+      "bigint": "bigint",
+      "boolean": "boolean",
+      "date": "date",
+      "float": "float",
+      "function": "function",
+      "integer": "integer",
+      "map": "map",
+      "nan": "nan",
+      "never": "never",
+      "null": "null",
+      "number": "number",
+      "object": "object",
+      "promise": "promise",
+      "set": "set",
+      "string": "string",
+      "symbol": "symbol",
+      "undefined": "undefined",
+      "unknown": "unknown",
+      "void": "void"
+    },
+    "validations": {
+      "cuid": "cuid",
+      "datetime": "datetime",
+      "email": "email",
+      "regex": "regex",
+      "url": "url",
+      "uuid": "uuid"
     }
-  },
-  "theme": {
-    "light": "Light",
-    "dark": "Dark",
-    "system": "System"
   }
 }

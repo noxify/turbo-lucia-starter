@@ -1,93 +1,166 @@
-import type { Session, User } from "lucia"
 import { cache } from "react"
 import { cookies } from "next/headers"
-import { DrizzlePostgreSQLAdapter } from "@lucia-auth/adapter-drizzle"
-import { Lucia } from "lucia"
+import { sha256 } from "@oslojs/crypto/sha2"
+import { encodeBase32LowerCaseNoPadding, encodeHexLowerCase } from "@oslojs/encoding"
 
-import { db } from "@acme/db/client"
-import { Session as SessionTable, User as UserTable } from "@acme/db/schema"
+import type { Session as BaseSession, User as BaseUser, SessionInput } from "@acme/db/schemas"
+import { sessionRepository } from "@acme/db/repositories"
+import { createLogger } from "@acme/logging"
 
-import { env } from "../env"
+import { env } from "./env"
 import * as discordProvider from "./providers/discord"
 import * as githubProvider from "./providers/github"
+import * as mockUserProvider from "./providers/mock-user"
 
-const adapter = new DrizzlePostgreSQLAdapter(db, SessionTable, UserTable)
+export type User = BaseUser
+export type Session = BaseSession
 
-export const lucia = new Lucia(adapter, {
-  sessionCookie: {
-    attributes: {
-      secure: env.NODE_ENV === "production",
-    },
-  },
-
-  getSessionAttributes(databaseSessionAttributes) {
-    return {
-      userAgent: databaseSessionAttributes.userAgent,
-      ipAddress: databaseSessionAttributes.ipAddress,
+export type AuthResponse =
+  | {
+      user: User
+      session: Session
     }
-  },
+  | { user: null; session: null }
 
-  getUserAttributes: (attributes) => {
-    return {
-      name: attributes.name,
-      email: attributes.email,
-    }
-  },
-})
+const logger = createLogger().withPrefix("@acme/auth")
 
-export const auth = cache(async (): Promise<AuthResponse> => {
-  const sessionId = cookies().get(lucia.sessionCookieName)?.value ?? null
-  if (!sessionId) {
-    return {
-      user: null,
-      session: null,
-    }
+const maxSessionDuration = 8
+const sessionUpdateAfter = 4
+
+function calculateDateTime(hours: number) {
+  const asMs = 1000 * 60 * 60 * hours
+  const fromNow = new Date(Date.now() + asMs)
+
+  return {
+    asMs,
+    fromNow,
+  }
+}
+
+export function generateSessionToken() {
+  const bytes = new Uint8Array(20)
+  crypto.getRandomValues(bytes)
+  const token = encodeBase32LowerCaseNoPadding(bytes)
+  return token
+}
+
+export async function createDbSessionAndCookie(
+  userId: string,
+  options: Omit<SessionInput, "id" | "expiresAt" | "userId">,
+) {
+  const token = generateSessionToken()
+  const session = await createSession(token, userId, options)
+
+  if (!session) {
+    throw new Error(`Could not create session`)
   }
 
-  const result = await lucia.validateSession(sessionId)
-  // next.js throws when you attempt to set cookie when rendering page
-  try {
-    if (result.session?.fresh) {
-      const sessionCookie = lucia.createSessionCookie(result.session.id)
-      cookies().set(
-        sessionCookie.name,
-        sessionCookie.value,
-        sessionCookie.attributes,
-      )
-    }
-    if (!result.session) {
-      const sessionCookie = lucia.createBlankSessionCookie()
-      cookies().set(
-        sessionCookie.name,
-        sessionCookie.value,
-        sessionCookie.attributes,
-      )
-    }
-  } catch {
-    /* empty */
+  await setSessionTokenCookie(token, session.expiresAt)
+
+  return session.id
+}
+
+export async function createSession(
+  token: string,
+  userId: string,
+  options: Omit<SessionInput, "id" | "expiresAt" | "userId">,
+) {
+  const sessionId = encodeHexLowerCase(sha256(new TextEncoder().encode(token)))
+
+  const expiresAt = calculateDateTime(maxSessionDuration).fromNow
+
+  logger.withMetadata({ sessionId, expiresAt, maxSessionDuration }).debug("Creating new session")
+
+  return await sessionRepository.create({ id: sessionId, userId, expiresAt, ...options })
+}
+
+export async function validateSessionToken(token: string): Promise<AuthResponse> {
+  const sessionId = encodeHexLowerCase(sha256(new TextEncoder().encode(token)))
+
+  const result = await sessionRepository.findFirst({
+    where: (session, { eq }) => eq(session.id, sessionId),
+    with: { user: true },
+  })
+
+  if (!result) return { session: null, user: null }
+
+  const { user, ...session } = result
+
+  logger
+    .withMetadata({
+      now: Date.now(),
+      expiresAt: session.expiresAt.getTime(),
+      expired: Date.now() >= session.expiresAt.getTime(),
+    })
+    .debug("checking session")
+
+  if (Date.now() >= session.expiresAt.getTime()) {
+    await invalidateSession(sessionId)
+    await deleteSessionTokenCookie()
+    return { session: null, user: null }
   }
+
+  if (Date.now() >= session.expiresAt.getTime() - calculateDateTime(sessionUpdateAfter).asMs) {
+    session.expiresAt = calculateDateTime(maxSessionDuration).fromNow
+    await sessionRepository.update({
+      where: (t, { eq }) => eq(t.id, session.id),
+      data: {
+        expiresAt: calculateDateTime(maxSessionDuration).fromNow,
+      },
+    })
+  }
+
+  return { session, user: { ...user } }
+}
+
+export async function invalidateSession(sessionId: string) {
+  logger.withContext({ sessionId }).debug("invalidate session")
+  await sessionRepository.delete({ where: (t, { eq }) => eq(t.id, sessionId) })
+}
+
+export async function setSessionTokenCookie(token: string, expiresAt: Date) {
+  const cookieStore = await cookies()
+
+  logger.withMetadata({ expiresAt }).debug("set session cookie")
+
+  cookieStore.set("session", token, {
+    httpOnly: true,
+    sameSite: "lax",
+    secure: env.NODE_ENV === "production",
+    expires: expiresAt,
+    path: "/",
+  })
+}
+
+export async function deleteSessionTokenCookie() {
+  const cookieStore = await cookies()
+
+  cookieStore.set("session", "", {
+    httpOnly: true,
+    sameSite: "lax",
+    secure: env.NODE_ENV === "production",
+    maxAge: 0,
+    path: "/",
+  })
+}
+
+export const auth = cache(async () => {
+  const cookieStore = await cookies()
+
+  const token = cookieStore.get("session")?.value ?? null
+
+  if (token === null) return { session: null, user: null }
+
+  const result = await validateSessionToken(token)
   return result
 })
 
 export const providers = {
+  ...(env.OAUTH_MOCK_ENABLED && {
+    mock_user: mockUserProvider,
+  }),
   github: githubProvider,
   discord: discordProvider,
 } as const
 
 export type Providers = keyof typeof providers
-
-export type LuciaUser = User
-
-export type AuthResponse =
-  | { user: User; session: Session }
-  | { user: null; session: null }
-declare module "lucia" {
-  interface Register {
-    Lucia: typeof lucia
-    DatabaseUserAttributes: Omit<typeof UserTable.$inferSelect, "id">
-    DatabaseSessionAttributes: Pick<
-      typeof SessionTable.$inferSelect,
-      "ipAddress" | "userAgent"
-    >
-  }
-}

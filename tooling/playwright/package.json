@@ -1,0 +1,31 @@
+{
+  "name": "@acme/playwright",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./playwright.config.ts",
+    "./fixtures": "./fixtures/index.ts"
+  },
+  "scripts": {
+    "clean": "git clean -xdf .cache .turbo dist node_modules",
+    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "lint": "eslint .",
+    "test:init": "playwright install chromium",
+    "trace": "playwright show-trace",
+    "typecheck": "tsc --noEmit"
+  },
+  "prettier": "@acme/prettier-config",
+  "dependencies": {
+    "@playwright/test": "1.49.1"
+  },
+  "devDependencies": {
+    "@acme/auth": "workspace:*",
+    "@acme/eslint-config": "workspace:*",
+    "@acme/prettier-config": "workspace:*",
+    "@acme/tsconfig": "workspace:*",
+    "eslint": "9.17.0",
+    "prettier": "3.4.2",
+    "typescript": "5.7.2"
+  }
+}

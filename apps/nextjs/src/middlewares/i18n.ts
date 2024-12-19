@@ -1,19 +1,15 @@
 import type { NextFetchEvent, NextRequest } from "next/server"
+import createMiddleware from "next-intl/middleware"
 
-import { createI18nMiddleware } from "@acme/locales"
+import { routing } from "@acme/locales/routing"
 
 import type { CustomMiddleware } from "~/middlewares/chain-middleware"
 
-const I18nMiddleware = createI18nMiddleware({
-  locales: ["en", "de"],
-  defaultLocale: "en",
-  urlMappingStrategy: "rewrite",
-})
+const handleI18nRouting = createMiddleware(routing)
 
 export function withI18n(middleware: CustomMiddleware) {
   return async (request: NextRequest, event: NextFetchEvent) => {
-    const response = I18nMiddleware(request)
-
+    const response = handleI18nRouting(request)
     return middleware(request, event, response)
   }
 }

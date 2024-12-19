@@ -1,0 +1,35 @@
+{
+  "name": "@acme/helpers",
+  "version": "2.0.0",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    "./*": "./src/*.ts"
+  },
+  "scripts": {
+    "clean": "git clean -xdf .cache .turbo dist node_modules",
+    "clean:cache": "git clean -xdf .cache",
+    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit --emitDeclarationOnly false"
+  },
+  "prettier": "@acme/prettier-config",
+  "dependencies": {
+    "isomorphic-dompurify": "2.19.0",
+    "nanoid": "5.0.9",
+    "zod": "3.24.1"
+  },
+  "devDependencies": {
+    "@acme/eslint-config": "workspace:*",
+    "@acme/prettier-config": "workspace:*",
+    "@acme/tsconfig": "workspace:*",
+    "@types/node": "22.10.2",
+    "eslint": "9.17.0",
+    "globby": "14.0.2",
+    "msw": "2.7.0",
+    "prettier": "3.4.2",
+    "typescript": "5.7.2",
+    "vitest": "2.1.8"
+  }
+}

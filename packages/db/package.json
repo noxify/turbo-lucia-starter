@@ -1,53 +1,58 @@
 {
   "name": "@acme/db",
-  "version": "0.1.0",
+  "version": "2.0.0",
   "private": true,
+  "license": "MIT",
   "type": "module",
   "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./src/index.ts"
-    },
-    "./client": {
-      "types": "./dist/client.d.ts",
-      "default": "./src/client.ts"
-    },
-    "./schema": {
-      "types": "./dist/schema.d.ts",
-      "default": "./src/schema.ts"
-    },
-    "./env": "./env.ts"
+    ".": "./src/index.ts",
+    "./client": "./src/client.ts",
+    "./env": "./src/env.ts",
+    "./repositories": "./src/repositories/index.ts",
+    "./repositories/*": "./src/repositories/*.ts",
+    "./repository": "./src/repository.ts",
+    "./schemas": "./src/schemas/index.ts",
+    "./schemas/*": "./src/schemas/*.ts"
   },
-  "license": "MIT",
   "scripts": {
-    "build": "tsc",
-    "dev": "tsc --watch",
-    "clean": "rm -rf .turbo node_modules",
+    "check": "pnpm with-env  drizzle-kit check",
+    "clean": "git clean -xdf .cache .turbo dist node_modules",
+    "clean:cache": "git clean -xdf .cache",
     "format": "prettier --check . --ignore-path ../../.gitignore",
-    "lint": "eslint",
+    "generate": "pnpm with-env pnpm drizzle-kit generate",
+    "lint": "eslint .",
     "migrate": "pnpm with-env drizzle-kit migrate",
-    "generate": "pnpm with-env drizzle-kit generate",
-    "push": "pnpm with-env drizzle-kit push",
-    "studio": "pnpm with-env drizzle-kit studio",
+    "pull": "pnpm with-env  drizzle-kit pull",
+    "push": "pnpm with-env  drizzle-kit push",
+    "seed": "pnpm with-env drizzle-seed",
+    "studio": "pnpm with-env drizzle-kit studio --host localhost",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false",
-    "with-env": "dotenv -e ../../.env --"
+    "with-env": "dotenv -e ../../.env"
   },
+  "prettier": "@acme/prettier-config",
   "dependencies": {
-    "@t3-oss/env-core": "0.10.1",
-    "drizzle-orm": "0.31.2",
-    "drizzle-zod": "0.5.1",
-    "postgres": "3.4.4",
-    "zod": "3.23.8"
+    "@acme/helpers": "workspace:*",
+    "@t3-oss/env-core": "0.11.1",
+    "drizzle-orm": "0.38.2",
+    "pg": "8.13.1",
+    "zod": "3.24.1"
   },
   "devDependencies": {
     "@acme/eslint-config": "workspace:*",
     "@acme/prettier-config": "workspace:*",
     "@acme/tsconfig": "workspace:*",
-    "dotenv-cli": "7.4.2",
-    "drizzle-kit": "0.22.8",
-    "eslint": "9.6.0",
-    "prettier": "3.3.2",
-    "typescript": "5.5.3"
-  },
-  "prettier": "@acme/prettier-config"
+    "@faker-js/faker": "9.3.0",
+    "@types/node": "22.10.2",
+    "@types/pg": "8.11.10",
+    "dotenv-cli": "7.4.4",
+    "drizzle-kit": "0.30.1",
+    "drizzle-seed": "0.1.3",
+    "eslint": "9.17.0",
+    "globby": "14.0.2",
+    "prettier": "3.4.2",
+    "tsx": "4.19.2",
+    "type-fest": "4.30.2",
+    "typescript": "5.7.2",
+    "vitest": "2.1.8"
+  }
 }

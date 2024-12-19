@@ -5,6 +5,9 @@
     "yoavbls.pretty-ts-errors",
     "bradlc.vscode-tailwindcss",
     "thibault-vanderseypen.i18n-json-editor",
-    "lokalise.i18n-ally"
+    "lokalise.i18n-ally",
+    "vitest.explorer",
+    "vercel.turbo-vsc",
+    "ms-playwright.playwright",
   ]
 }

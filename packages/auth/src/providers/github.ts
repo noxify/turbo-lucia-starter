@@ -1,19 +1,18 @@
 import type { Endpoints } from "@octokit/types"
 import { GitHub } from "arctic"
-import { generateId } from "lucia"
 
-import { db } from "@acme/db/client"
-import { Account, User } from "@acme/db/schema"
+import { env } from "../env"
+import { handleUser } from "../user-handler"
 
-import { env } from "../../env"
+const callbackUrl = env.APPLICATION_URL
+  ? `https://${env.APPLICATION_URL}/api/auth/github/callback`
+  : "http://localhost:3000/api/auth/github/callback"
 
-const github = new GitHub(env.AUTH_GITHUB_ID, env.AUTH_GITHUB_SECRET)
+const github = new GitHub(env.AUTH_GITHUB_ID, env.AUTH_GITHUB_SECRET, callbackUrl)
 
 export const name = "Github"
-export const getAuthorizationUrl = async (state: string) => {
-  return await github.createAuthorizationURL(state, {
-    scopes: ["read:user", "user:email"],
-  })
+export const getAuthorizationUrl = (state: string, _codeVerifier: string) => {
+  return github.createAuthorizationURL(state, ["read:user", "user:email"])
 }
 
 export const handleCallback = async (code: string) => {
@@ -21,33 +20,11 @@ export const handleCallback = async (code: string) => {
 
   const response = await fetch("https://api.github.com/user", {
     headers: {
-      Authorization: `Bearer ${tokens.accessToken}`,
+      Authorization: `Bearer ${tokens.accessToken()}`,
     },
   })
-  const githubUser =
-    (await response.json()) as Endpoints["GET /user"]["response"]["data"]
+  const githubUser = (await response.json()) as Endpoints["GET /user"]["response"]["data"]
 
-  const existingAccount = await db.query.Account.findFirst({
-    columns: {
-      userId: true,
-    },
-
-    where: (accounts, { and, eq }) => {
-      return and(
-        eq(accounts.providerId, "github"),
-        // since the id in github is a number, we have to convert it
-        // to a string, because our accounts tables expects a string
-        // easy peacy, lemon squeezy
-        eq(accounts.providerUserId, githubUser.id.toString()),
-      )
-    },
-  })
-
-  if (existingAccount) {
-    return existingAccount.userId
-  }
-
-  let userId = generateId(15)
   let userEmail: string
 
   if (!githubUser.email) {
@@ -55,49 +32,32 @@ export const handleCallback = async (code: string) => {
     // See https://docs.github.com/en/rest/users/emails#list-public-email-addresses-for-the-authenticated-user
     const res = await fetch("https://api.github.com/user/emails", {
       headers: {
-        Authorization: `Bearer ${tokens.accessToken}`,
+        Authorization: `Bearer ${tokens.accessToken()}`,
         "User-Agent": "luciaauth",
       },
     })
 
     if (res.ok) {
-      const emails =
-        (await res.json()) as Endpoints["GET /user/emails"]["response"]["data"]
+      const emails = (await res.json()) as Endpoints["GET /user/emails"]["response"]["data"]
 
       const primaryEmail = emails.find((ele) => ele.primary)
 
       // use first email from the /users/emails endpoint in case we can't fetch the primary email
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       userEmail = primaryEmail?.email ?? emails[0]!.email
+    } else {
+      userEmail = `${githubUser.login}@github-noemail.com`
     }
+  } else {
+    userEmail = githubUser.email
   }
 
-  await db.transaction(async (tx) => {
-    const existingUser = await tx.query.User.findFirst({
-      columns: {
-        id: true,
-      },
-      where: (users, { and, eq }) => {
-        return and(eq(users.email, userEmail))
-      },
-    })
-
-    if (!existingUser) {
-      await tx.insert(User).values({
-        id: userId,
-        name: githubUser.login,
-        email: userEmail,
-      })
-    } else {
-      userId = existingUser.id
-    }
-
-    await tx.insert(Account).values({
-      providerId: "github",
-      providerUserId: githubUser.id.toString(),
-      userId,
-    })
+  const user = await handleUser({
+    provider: "github",
+    providerUserId: githubUser.id.toString(),
+    name: githubUser.login,
+    email: userEmail,
   })
 
-  return userId
+  return user.id
 }

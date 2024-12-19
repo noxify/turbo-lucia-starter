@@ -6,13 +6,8 @@ import { fileURLToPath } from "url"
 
 /** @type { PrettierConfig | SortImportsConfig | TailwindConfig } */
 const config = {
-  plugins: [
-    "@ianvs/prettier-plugin-sort-imports",
-    "prettier-plugin-tailwindcss",
-  ],
-  tailwindConfig: fileURLToPath(
-    new URL("../../tooling/tailwind/web.ts", import.meta.url),
-  ),
+  plugins: ["@ianvs/prettier-plugin-sort-imports", "prettier-plugin-tailwindcss"],
+  tailwindConfig: fileURLToPath(new URL("../../tooling/tailwind/web.ts", import.meta.url)),
   tailwindFunctions: ["cn", "cva"],
   importOrder: [
     "<TYPES>",
@@ -31,6 +26,7 @@ const config = {
   ],
   importOrderParserPlugins: ["typescript", "jsx", "decorators-legacy"],
   importOrderTypeScriptVersion: "4.4.0",
+  printWidth: 100,
   semi: false,
   overrides: [
     {
