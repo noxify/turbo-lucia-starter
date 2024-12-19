@@ -40,7 +40,7 @@ importers:
         specifier: 2.1.8
         version: 2.1.8(@types/node@22.10.2)(jsdom@25.0.1)(msw@2.7.0(@types/node@22.10.2)(typescript@5.7.2))
 
-  apps/frontend:
+  apps/nextjs:
     dependencies:
       '@acme/auth':
         specifier: workspace:*
@@ -648,6 +648,8 @@ importers:
       typescript:
         specifier: 5.7.2
         version: 5.7.2
+
+  tooling/github: {}
 
   tooling/playwright:
     dependencies:
