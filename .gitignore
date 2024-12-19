@@ -43,8 +43,24 @@ yarn-error.log*
 .vercel
 
 # typescript
-*.tsbuildinfo
 dist/
+.cache
 
 # turbo
 .turbo
+postgres-data
+.env.docker
+cdk.out/
+infrastructure/rds-setup/cdk.out
+
+**/e2e-*
+**/playwright-*
+**/results.xml
+apps/frontend/junit-report.xml
+junit-report.xml
+apps/backend/src/sdk/zeus/const.ts
+apps/backend/src/sdk/zeus/index.ts
+apps/backend/src/sdk/zeus/typedDocumentNode.ts
+apps/backend/schema.graphql
+apps/backend/src/graphql-env.d.ts
+packages/db/.generated/

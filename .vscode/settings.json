@@ -5,12 +5,13 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "eslint.rules.customizations": [{ "rule": "*", "severity": "warn" }],
-  "eslint.useFlatConfig": true,
+  "eslint.runtime": "node",
   "eslint.workingDirectories": [
     { "pattern": "apps/*/" },
     { "pattern": "packages/*/" },
     { "pattern": "tooling/*/" }
   ],
+  "prettier.ignorePath": ".gitignore",
   "tailwindCSS.experimental.classRegex": [
     ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
     ["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
@@ -26,7 +27,13 @@
   "i18n-ally.editor.preferEditor": true,
   "i18n-ally.pathMatcher": "{locale}.json",
   "i18n-ally.keystyle": "nested",
-  "i18n-ally.enabledFrameworks": ["next-international"],
+  "i18n-ally.enabledFrameworks": ["next-intl", "general"],
   "i18n-ally.extract.autoDetect": true,
-  "i18n-ally.fullReloadOnChanged": true
+  "i18n-ally.fullReloadOnChanged": true,
+
+  "vitest.nodeEnv": {
+    "npm_lifecycle_event": "test"
+  },
+  "i18n-ally.sortKeys": true,
+  "i18n-ally.translate.fallbackToKey": true
 }

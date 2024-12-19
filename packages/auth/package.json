@@ -1,42 +1,48 @@
 {
   "name": "@acme/auth",
-  "version": "0.1.0",
+  "version": "2.0.0",
   "private": true,
+  "license": "MIT",
   "type": "module",
   "exports": {
-    ".": {
-      "default": "./src/index.ts"
-    },
-    "./env": "./env.ts"
+    ".": "./src/index.ts",
+    "./env": "./src/env.ts",
+    "./providers/*": "./src/providers/*.ts",
+    "./user-handler": "./src/user-handler.ts"
   },
-  "license": "MIT",
   "scripts": {
-    "clean": "rm -rf .turbo node_modules",
+    "clean": "git clean -xdf .cache .turbo dist node_modules",
+    "clean:cache": "git clean -xdf .cache",
     "format": "prettier --check . --ignore-path ../../.gitignore",
-    "lint": "eslint",
+    "lint": "eslint .",
     "typecheck": "tsc --noEmit"
   },
+  "prettier": "@acme/prettier-config",
   "dependencies": {
     "@acme/db": "workspace:*",
-    "@lucia-auth/adapter-drizzle": "1.0.7",
-    "@t3-oss/env-nextjs": "0.10.1",
-    "arctic": "1.9.1",
-    "lucia": "3.2.0",
-    "next": "14.2.4",
-    "oslo": "1.2.1",
-    "react": "18.3.1",
-    "react-dom": "18.3.1",
-    "zod": "3.23.8"
+    "@acme/logging": "workspace:*",
+    "@hapi/bourne": "3.0.0",
+    "@oslojs/crypto": "1.0.1",
+    "@oslojs/encoding": "1.1.0",
+    "@oslojs/oauth2": "0.5.0",
+    "@t3-oss/env-nextjs": "0.11.1",
+    "arctic": "2.3.3",
+    "date-fns": "4.1.0",
+    "jose": "5.9.6",
+    "next": "15.1.2",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "zod": "3.24.1"
   },
   "devDependencies": {
     "@acme/eslint-config": "workspace:*",
     "@acme/prettier-config": "workspace:*",
     "@acme/tsconfig": "workspace:*",
-    "@octokit/types": "13.5.0",
-    "discord-api-types": "0.37.91",
-    "eslint": "9.6.0",
-    "prettier": "3.3.2",
-    "typescript": "5.5.3"
-  },
-  "prettier": "@acme/prettier-config"
+    "@octokit/types": "13.6.2",
+    "discord-api-types": "0.37.112",
+    "eslint": "9.17.0",
+    "globby": "14.0.2",
+    "prettier": "3.4.2",
+    "typescript": "5.7.2"
+  }
 }

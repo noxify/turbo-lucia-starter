@@ -1,7 +1,10 @@
 /// <reference types="./types.d.ts" />
 
+import * as path from "node:path"
+import { includeIgnoreFile } from "@eslint/compat"
 import eslint from "@eslint/js"
 import importPlugin from "eslint-plugin-import"
+import packageJson from "eslint-plugin-package-json/configs/recommended"
 import turboPlugin from "eslint-plugin-turbo"
 import tseslint from "typescript-eslint"
 
@@ -16,8 +19,7 @@ export const restrictEnvAccess = tseslint.config({
       {
         object: "process",
         property: "env",
-        message:
-          "Use `import { env } from '~/env'` instead to ensure validated types.",
+        message: "Use `import { env } from '~/env'` instead to ensure validated types.",
       },
     ],
     "no-restricted-imports": [
@@ -25,17 +27,25 @@ export const restrictEnvAccess = tseslint.config({
       {
         name: "process",
         importNames: ["env"],
-        message:
-          "Use `import { env } from '~/env'` instead to ensure validated types.",
+        message: "Use `import { env } from '~/env'` instead to ensure validated types.",
       },
     ],
   },
 })
 
 export default tseslint.config(
+  // Ignore files not tracked by VCS and any config files
+  includeIgnoreFile(path.join(import.meta.dirname, "../../.gitignore")),
   {
     // Globally ignored files
     ignores: ["**/*.config.*"],
+  },
+  {
+    ...packageJson,
+    rules: {
+      ...packageJson.rules,
+      "package-json/valid-package-def": "off",
+    },
   },
   {
     files: ["**/*.js", "**/*.ts", "**/*.tsx"],
@@ -52,6 +62,8 @@ export default tseslint.config(
     rules: {
       ...turboPlugin.configs.recommended.rules,
 
+      "no-console": "error",
+
       "@typescript-eslint/no-unused-vars": [
         "error",
         { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
@@ -60,10 +72,7 @@ export default tseslint.config(
         "warn",
         { prefer: "type-imports", fixStyle: "separate-type-imports" },
       ],
-      "@typescript-eslint/no-misused-promises": [
-        2,
-        { checksVoidReturn: { attributes: false } },
-      ],
+      "@typescript-eslint/no-misused-promises": [2, { checksVoidReturn: { attributes: false } }],
       "@typescript-eslint/no-unnecessary-condition": [
         "error",
         {
@@ -72,6 +81,7 @@ export default tseslint.config(
       ],
       "@typescript-eslint/no-non-null-assertion": "error",
       "import/consistent-type-specifier-style": ["error", "prefer-top-level"],
+      "@typescript-eslint/only-throw-error": "off",
     },
   },
   {

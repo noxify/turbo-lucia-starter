@@ -1,121 +1,66 @@
-# Test
+# Acme
 
-> The stack originates from [create-t3-turbo](https://github.com/t3-oss/create-t3-turbo).
+## Requirements
 
-## Features
+- Node >= 22.11 - https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating
+- Postgres >= 16 - https://postgresapp.com/
+- pnpm >= 9.15.0 - https://pnpm.io/installation
 
-- Monorepo via turborepo
-- NextJS 14
-- TRPC ( with RSC support )
-- Lucia Auth with multi provider support
-- i18n support ( with support for i18n-ally )
-- tailwind with shadcn-ui
+## Getting started
 
-## Installation
+1. Clone the repo
+2. Open the repo in VSC
+3. Install the recommended extensions ( use `@recommended` inside the VSC Extensions search bar )
+4. Run `cp .env.example .env` to create a `.env` file
+5. Update the `.env` file with your values
+6. Run `pnpm install` to install dependencies
+7. Run `pnpm db:migrate:dev` to create the tables in the database
+8. Run `pnpm dev` to start the app in development mode
+9. Start coding
 
-Use Turbo's CLI to init your project (use PNPM as package manager):
+## Project structure
 
-```bash
-npx create-turbo@latest -e https://github.com/noxify/t3-turbo-lucia
+This project is a monorepo based on turborepo.
+
+```
+├── apps
+│   └── frontend - Contains the logic for the site
+├── packages
+│   ├── auth - Based on lucia-auth.com / same as we have at itaps monorepo
+│   ├── db - Contains all the database related stuff ( prisma schema, migrations, seeds etc. )
+│   ├── helpers - Helper functions 🤷‍♂️
+│   ├── locales - contains the translations for the `frontend` app
+│   ├── logging - Contains the logging wrapper ( via LogLayer )
+│   ├── search-params - Contains the search params for the `frontend` app ( e.g. pagination, sorting etc. for the datatable )
+│   └── ui - Contains all ui components ( based on shadcn/ui)
+└── tooling
+    ├── eslint - Contains the config files for eslint
+    ├── playwright - Contains the config file for playwright
+    ├── prettier - Contains the config file for prettier
+    ├── tailwind - Contains the config files for tailwind w/ db ui colors
+    └── typescript - Contains the config files for typescript
 ```
 
-## About
+## What's currently included?
 
-It uses [Turborepo](https://turborepo.org) and contains:
+- The frontend app is configured to use the latest nextjs version (15)
+- Auth page is working
+- Redirect for unauthorized users to login page
+- Empty dashboard ( authorized users only )
+- Initial playwright tests exists ( login tests )
+- Auth is already configured for WebSSO & Mock Users
+- 18n is configured with `next-intl`
 
-```text
-.vscode
-  └─ Recommended extensions and settings for VSCode users
-apps
-  └─ next.js
-      ├─ Next.js 14
-      ├─ React 18
-      ├─ Tailwind CSS
-      └─ E2E Typesafe API Server & Client
-packages
-  ├─ api
-  |   └─ tRPC v11 router definition
-  ├─ auth
-  |   └─ Authentication using lucia-auth@v3
-  ├─ db
-  |   └─ Typesafe db calls using Drizzle & postgres
-  ├─ locales
-  |   └─ type-safe internationalization
-  ├─ validators
-  |   └─ shared zod schemas for trpc and forms
-  └─ ui
-      └─ Start of a UI package for the webapp using shadcn-ui
-tooling
-  ├─ eslint
-  |   └─ shared, fine-grained, eslint presets
-  ├─ prettier
-  |   └─ shared prettier configuration
-  ├─ tailwind
-  |   └─ shared tailwind configuration
-  └─ typescript
-      └─ shared tsconfig you can extend from
-```
+## Helpful commands
 
-> In this template, we use `@acme` as a placeholder for package names. As a user, you might want to replace it with your own organization or project name. You can use find-and-replace to change all the instances of `@acme` to something like `@my-company` or `@project-name`.
-
-## Quick Start
-
-To get it running, follow the steps below.
-
-The db is currently configured for `postgres`.
-
-Feel free to change it.
-
-```bash
-# Install dependencies
-pnpm i
-
-# Configure environment variables
-# There is an `.env.example` in the root directory you can use for reference
-cp .env.example .env
-
-# Push the Drizzle schema to the database
-pnpm db:push
-
-# Let's get the party stared
-pnpm dev
-```
-
-## i18n
-
-This packages uses [next-international](https://github.com/quiiBz/next-international) for type-safe translations.
-
-This setup is a bit different to the original docs.
-We're using `json` files and generating the `ts` files from them.
-
-Why? Using json files allows us to use the vsc extension [`i18n ally`](https://github.com/lokalise/i18n-ally), which makes it a lot easier to manage the translations.
-
-> Note: If you don't need / use the i18n-ally extension, you could simply import the typescript files directly ( without using the json files).
-> Unfortunately the i18n-ally doesn't support writing `.ts` files.
-
-**Example:**
-
-Inside a component you write something like `{t('new.translation.key')}`. If you have the vsc extension installed, everything is pre-configured and you only have to hover over the `new.translation.key` and you will see a popover from `i18n ally` which helps you to generate the translations.
-
-If you save the translation, it will update the `json` files inside `packages/locales/src/lang`.
-
-Last step what you have to do is to run `pnpm lang:gen` from your project root to (re-)generate the `ts` files ( which are located in `packages/locales/src/generated` ).
-
-> Note: Thanks to dBianchii, he provided a PR which automates the re-generation 🫡
-> So, while running `pnpm dev` the `generated/[lang].ts` files are (re-)generated after updating the json files automagically.
-
-The vsc extension includes also some other features.
-
-Visit their [wiki](https://github.com/lokalise/i18n-ally/wiki) to learn more about it.
-
-## Credits / Special thanks
-
-- https://github.com/shadcn-ui
-- https://github.com/juliusmarminge
-- https://github.com/dBianchii
-- https://github.com/t3-oss
-- https://github.com/QuiiBz
-- https://github.com/HamedBahram
-- https://github.com/lucia-auth
-
-If you like what you see, feel free to support one or all of them via their sponsoring options ( if available ).
+- `pnpm dev` - Runs all apps & packages in dev mode. ( if they have a `dev` script )
+- `pnpm build` - Builds all apps & packages. ( if they have a `build` script )
+- `pnpm test` - Runs all tests ( if they have a `test` script )
+- `pnpm lint` - Lints all files in all apps & packages ( if they have a `lint` script )
+- `pnpm format:fix` - Formats all files. ( if they have a `format` script )
+- `pnpm typecheck` - Runs the typescript type check on all apps & packages. ( if they have a `typecheck` script )
+- `pnpm db:migrate:dev` - Runs the prisma migrations in dev mode w/o seeding
+- `pnpm db:migrate:reset` - Resets the database and runs all existing migrations w/o seeding
+- `pnpm db:seed` - Seeds the database with some data
+- `pnpm db:studio` - Opens the prisma studio
+- `pnpm db:generate` - Generates the prisma client from the schema ( helpful after running `pnpm i`)

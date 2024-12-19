@@ -2,9 +2,6 @@
   "$schema": "https://turborepo.org/schema.json",
   "ui": "tui",
   "tasks": {
-    "topo": {
-      "dependsOn": ["^topo"]
-    },
     "build": {
       "dependsOn": ["^build"],
       "outputs": [
@@ -13,29 +10,38 @@
         "next-env.d.ts",
         ".expo/**",
         ".output/**",
-        ".vercel/output/**"
+        ".vercel/output/**",
+        ".cache/tsbuildinfo.json",
+        "dist/**"
       ]
     },
+    "test": {},
     "dev": {
       "persistent": true,
       "cache": false
     },
+    "start": {
+      "persistent": false,
+      "cache": false
+    },
+
     "format": {
-      "outputs": ["node_modules/.cache/.prettiercache"],
+      "outputs": [".cache/.prettiercache"],
       "outputLogs": "new-only"
     },
     "lint": {
-      "dependsOn": ["^topo"],
-      "outputs": ["node_modules/.cache/.eslintcache"]
+      "outputs": [".cache/.eslintcache"]
     },
     "typecheck": {
-      "dependsOn": ["^topo"],
-      "outputs": ["node_modules/.cache/tsbuildinfo.json"]
+      "outputs": [".cache/tsbuildinfo.json"]
     },
     "clean": {
       "cache": false
     },
     "//#clean": {
+      "cache": false
+    },
+    "clean:cache": {
       "cache": false
     },
     "push": {
@@ -49,22 +55,29 @@
     "ui-add": {
       "cache": false,
       "interactive": true
+    },
+    "test:e2e": {
+      "cache": false
     }
   },
   "globalEnv": [
-    "DATABASE_URL",
-    "AUTH_DISCORD_ID",
-    "AUTH_DISCORD_SECRET",
-    "AUTH_REDIRECT_PROXY_URL",
-    "AUTH_SECRET",
+    "APPLICATION_URL",
+    "AUTH_MOCK",
+    "AUTH_MOCK_TOKEN",
+    "NEXT_TELEMETRY_DISABLED",
+    "AZURE_TENANT_ID",
+    "AZURE_APP_ID",
+    "AUTH_AZURE_ID",
+    "AUTH_AZURE_SECRET",
+    "RDS_ENGINE",
+    "RDS_HOST",
+    "RDS_PORT",
+    "RDS_USERNAME",
+    "RDS_PASSWORD",
+    "RDS_DBNAME",
+    "RDS_DEBUG",
+    "LOG_LEVEL",
     "PORT"
   ],
-  "globalPassThroughEnv": [
-    "NODE_ENV",
-    "CI",
-    "VERCEL",
-    "VERCEL_ENV",
-    "VERCEL_URL",
-    "npm_lifecycle_event"
-  ]
+  "globalPassThroughEnv": ["NODE_ENV", "CI", "npm_lifecycle_event"]
 }

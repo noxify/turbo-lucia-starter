@@ -13,10 +13,7 @@ export type CustomMiddleware = (
 
 type MiddlewareFactory = (middleware: CustomMiddleware) => CustomMiddleware
 
-export function chainMiddleware(
-  functions: MiddlewareFactory[],
-  index = 0,
-): CustomMiddleware {
+export function chainMiddleware(functions: MiddlewareFactory[], index = 0): CustomMiddleware {
   const current = functions[index]
 
   if (current) {
@@ -24,11 +21,7 @@ export function chainMiddleware(
     return current(next)
   }
 
-  return (
-    request: NextRequest,
-    event: NextFetchEvent,
-    response: NextResponse,
-  ) => {
+  return (request: NextRequest, event: NextFetchEvent, response: NextResponse) => {
     return response
   }
 }

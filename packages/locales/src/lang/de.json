@@ -1,34 +1,145 @@
 {
   "auth": {
-    "signout": "Abmelden",
-    "headline": "Anmelden mit",
+    "error": {
+      "callback_error": "Die Anmeldung konnte nicht abgeschlossen werden. Bitte versuchen Sie es erneut.",
+      "code_error": "Die Anmeldung konnte nicht abgeschlossen werden. Bitte versuchen Sie es erneut.",
+      "invalid_provider": "Dieser OAuth-Anbieter wird nicht unterstützt. \nBitte nutzen Sie einen anderen Anbieter.",
+      "title": "Anmeldung nicht möglich",
+      "unknown_error": "Etwas ist völlig schief gelaufen. Bitte versuchen Sie es noch einmal."
+    },
+    "headline": "Melden Sie sich an mit",
     "page_title": "Anmelden",
+    "signin_button": "Anmelden mit",
+    "signout": "Abmelden",
     "title": "Anmelden"
   },
-  "welcome": "Hallo <span class=\"font-medium\">{name}</span>!",
-  "common": {
-    "delete": "Löschen",
-    "create": "Erstellen"
+
+  "dashboard": {
+    "title": "Dashboard"
   },
-  "error": {
-    "not_authorized": "Du bist nicht angemeldet."
+
+  "errors": {
+    "no_permission": "Sie sind nicht berechtigt, diese Aktion durchzuführen.",
+    "not_authorized": "Sie sind nicht angemeldet.",
+    "record_not_found": "Datensatz nicht gefunden"
   },
-  "posts": {
-    "delete": {
-      "failed": "Post konnte nicht gelöscht werden."
-    },
-    "no_records": "Keine Posts.",
-    "create": {
-      "failed": "Post konnte nicht erstellt werden."
+
+  "welcome": "Willkommen <user></user>",
+  "zod": {
+    "custom_validations": {},
+    "errors": {
+      "custom": "Ungültige Eingabe",
+      "invalid_arguments": "Ungültige Funktionsargumente",
+      "invalid_date": "Ungültiges Datum",
+      "invalid_enum_value": "Ungültiger Enum-Wert. {- options} erwartet, '{received}' erhalten",
+      "invalid_intersection_types": "Schnittmengenergebnisse konnten nicht zusammengeführt werden",
+      "invalid_literal": "Ungültiger Literalwert, {expected} erwartet",
+      "invalid_return_type": "Ungültiger Funktionsrückgabewert",
+      "invalid_string": {
+        "cuid": "Ungültige {validation}",
+        "datetime": "Ungültiger {validation}",
+        "email": "Ungültige {validation}",
+        "endsWith": "Ungültige Eingabe: muss mit \"{endsWith}\" enden",
+        "regex": "Ungültig",
+        "startsWith": "Ungültige Eingabe: muss mit \"{startsWith}\" beginnen",
+        "url": "Ungültige {validation}",
+        "uuid": "Ungültige {validation}"
+      },
+      "invalid_type": "{expected} erwartet, {received} erhalten",
+      "invalid_type_received_null": "Darf nicht leer sein",
+      "invalid_type_received_undefined": "Darf nicht leer sein",
+      "invalid_union": "Ungültige Eingabe",
+      "invalid_union_discriminator": "Ungültiger Diskriminatorwert, {- options} erwartet",
+      "not_finite": "Zahl muss endlich sein",
+      "not_multiple_of": "Zahl muss ein Vielfaches von {multipleOf} sein",
+      "too_big": {
+        "array": {
+          "exact": "{path} muss genau {maximum} Element(e) enthalten",
+          "inclusive": "{path} darf höchstens {maximum} Element(e) enthalten",
+          "not_inclusive": "{path} muss weniger als {maximum} Element(e) enthalten"
+        },
+        "date": {
+          "exact": "Datum muss genau {- maximum, datetime} sein",
+          "inclusive": "Datum muss kleiner oder gleich {- maximum, datetime} sein",
+          "not_inclusive": "Datum muss kleiner als {- maximum, datetime} sein"
+        },
+        "number": {
+          "exact": "Zahl muss genau {maximum} sein",
+          "inclusive": "Zahl muss kleiner oder gleich {maximum} sein",
+          "not_inclusive": "Zahl muss kleiner als {maximum} sein"
+        },
+        "set": {
+          "exact": "Ungültige Eingabe",
+          "inclusive": "Ungültige Eingabe",
+          "not_inclusive": "Ungültige Eingabe"
+        },
+        "string": {
+          "exact": "{path} muss genau {maximum} Zeichen enthalten",
+          "inclusive": "{path} darf höchstens {maximum} Zeichen enthalten",
+          "not_inclusive": "{path} muss weniger als {maximum} Zeichen enthalten"
+        }
+      },
+      "too_small": {
+        "array": {
+          "exact": "Array muss genau {minimum} Element(e) enthalten",
+          "inclusive": "Array muss mindestens {minimum} Element(e) enthalten",
+          "not_inclusive": "Array muss mehr als {minimum} Element(e) enthalten"
+        },
+        "date": {
+          "exact": "Datum muss genau {- minimum, datetime} sein",
+          "inclusive": "Datum muss größer oder gleich {- minimum, datetime} sein",
+          "not_inclusive": "Datum muss größer als {- minimum, datetime} sein"
+        },
+        "number": {
+          "exact": "Zahl muss genau {minimum} sein",
+          "inclusive": "Zahl muss größer oder gleich {minimum} sein",
+          "not_inclusive": "Zahl muss größer als {minimum} sein"
+        },
+        "set": {
+          "exact": "Ungültige Eingabe",
+          "inclusive": "Ungültige Eingabe",
+          "not_inclusive": "Ungültige Eingabe"
+        },
+        "string": {
+          "exact": "String muss genau {minimum} Zeichen enthalten",
+          "inclusive": "{path} muss mindestens {minimum} Zeichen enthalten",
+          "not_inclusive": "String muss mehr als {minimum} Zeichen enthalten"
+        }
+      },
+      "unrecognized_keys": "Unbekannte Schlüssel im Objekt: {- keys}"
     },
     "form": {
-      "title": "Titel",
-      "content": "Inhalt"
+      "field": "Validierung"
+    },
+    "types": {
+      "array": "Array",
+      "bigint": "Bigint",
+      "boolean": "Boolean",
+      "date": "Datum",
+      "float": "Gleitkommazahl",
+      "function": "Funktion",
+      "integer": "Ganzzahl",
+      "map": "Map",
+      "nan": "NaN",
+      "never": "Never",
+      "null": "Nullwert",
+      "number": "Zahl",
+      "object": "Objekt",
+      "promise": "Promise",
+      "set": "Set",
+      "string": "String",
+      "symbol": "Symbol",
+      "undefined": "Undefined",
+      "unknown": "Unknown",
+      "void": "Void"
+    },
+    "validations": {
+      "cuid": "CUID",
+      "datetime": "Datums- und Uhrzeitwert",
+      "email": "E-Mail-Adresse",
+      "regex": "Regex",
+      "url": "URL",
+      "uuid": "UUID"
     }
-  },
-  "theme": {
-    "light": "Hell",
-    "dark": "Dunkel",
-    "system": "System"
   }
 }

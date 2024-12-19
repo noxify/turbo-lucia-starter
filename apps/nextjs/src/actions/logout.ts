@@ -1,29 +1,17 @@
 "use server"
 
-import { cookies } from "next/headers"
-import { redirect } from "next/navigation"
+import { getLocale } from "next-intl/server"
 
-import { auth, lucia } from "@acme/auth"
+import { auth, deleteSessionTokenCookie, invalidateSession } from "@acme/auth"
+import { redirect } from "@acme/locales/react"
 
-export async function logoutAction(): Promise<ActionResult> {
+export async function logoutAction() {
   const { session } = await auth()
   if (!session) {
-    return {
-      error: "Unauthorized",
-    }
+    return redirect({ href: "/auth", locale: await getLocale() })
   }
+  await invalidateSession(session.id)
 
-  await lucia.invalidateSession(session.id)
-
-  const sessionCookie = lucia.createBlankSessionCookie()
-  cookies().set(
-    sessionCookie.name,
-    sessionCookie.value,
-    sessionCookie.attributes,
-  )
-  return redirect("/")
-}
-
-interface ActionResult {
-  error: string | null
+  await deleteSessionTokenCookie()
+  return redirect({ href: "/auth", locale: await getLocale() })
 }

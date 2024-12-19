@@ -1,0 +1,5 @@
+{
+  "extends": "@acme/tsconfig/internal-package.json",
+  "include": ["src", "tests"],
+  "exclude": ["node_modules", "dist"]
+}

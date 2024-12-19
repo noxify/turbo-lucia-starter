@@ -1,3 +1,4 @@
+import { fixupPluginRules } from "@eslint/compat"
 import reactPlugin from "eslint-plugin-react"
 import hooksPlugin from "eslint-plugin-react-hooks"
 
@@ -7,7 +8,7 @@ export default [
     files: ["**/*.ts", "**/*.tsx"],
     plugins: {
       react: reactPlugin,
-      "react-hooks": hooksPlugin,
+      "react-hooks": fixupPluginRules(hooksPlugin),
     },
     rules: {
       ...reactPlugin.configs["jsx-runtime"].rules,
