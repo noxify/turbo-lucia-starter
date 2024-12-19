@@ -1,4 +1,4 @@
-# Acme
+# Turbo Lucia Starter
 
 ## Requirements
 
@@ -18,6 +18,21 @@
 8. Run `pnpm dev` to start the app in development mode
 9. Start coding
 
+## About this template
+
+This template was original a copy from [t3-oss/create-t3-turbo](https://github.com/t3-oss/create-t3-turbo).
+
+We just replaced AuthJS with LuciaAuth.
+
+We're using this template internally and found out that some parts are not needed for a "web" monorepo ( = without expo ).
+
+So we updated it to be more like a "web" monorepo and removed all unnecessary stuff.
+This was mainly the `trpc` package with `tanstack/query`.
+
+Why? With all the nextjs updates, we think, most usecases don't need the extra layer to get the data.
+
+The template will use nextjs directly to fetch the data. ( https://nextjs.org/docs/app/building-your-application/data-fetching/fetching )
+
 ## Project structure
 
 This project is a monorepo based on turborepo.
@@ -35,6 +50,7 @@ This project is a monorepo based on turborepo.
 │   └── ui - Contains all ui components ( based on shadcn/ui)
 └── tooling
     ├── eslint - Contains the config files for eslint
+    ├── github - Contains the configuration for github actions
     ├── playwright - Contains the config file for playwright
     ├── prettier - Contains the config file for prettier
     ├── tailwind - Contains the config files for tailwind w/ db ui colors
@@ -43,12 +59,13 @@ This project is a monorepo based on turborepo.
 
 ## What's currently included?
 
-- The frontend app is configured to use the latest nextjs version (15)
+- The frontend app is configured to use the latest nextjs version (15.1)
 - Auth page is working
 - Redirect for unauthorized users to login page
 - Empty dashboard ( authorized users only )
 - Initial playwright tests exists ( login tests )
-- Auth is already configured for WebSSO & Mock Users
+- Auth is already configured for Github, Discord
+- Supports also mock users
 - 18n is configured with `next-intl`
 
 ## Helpful commands
@@ -59,8 +76,22 @@ This project is a monorepo based on turborepo.
 - `pnpm lint` - Lints all files in all apps & packages ( if they have a `lint` script )
 - `pnpm format:fix` - Formats all files. ( if they have a `format` script )
 - `pnpm typecheck` - Runs the typescript type check on all apps & packages. ( if they have a `typecheck` script )
-- `pnpm db:migrate:dev` - Runs the prisma migrations in dev mode w/o seeding
-- `pnpm db:migrate:reset` - Resets the database and runs all existing migrations w/o seeding
-- `pnpm db:seed` - Seeds the database with some data
-- `pnpm db:studio` - Opens the prisma studio
-- `pnpm db:generate` - Generates the prisma client from the schema ( helpful after running `pnpm i`)
+- `pnpm db:generate` - Runs the drizzle generate command: https://orm.drizzle.team/docs/drizzle-kit-generate
+- `pnpm db:migrate` - Runs the drizzle migrate command: https://orm.drizzle.team/docs/drizzle-kit-migrate
+- `pnpm db:push` - Runs the drizzle push command: https://orm.drizzle.team/docs/drizzle-kit-push
+- `pnpm db:seed` - Seeds some data - Uses the drizzle seed command: https://orm.drizzle.team/docs/seed-overview
+- `pnpm db:studio` - Opens the drizzle studio: https://orm.drizzle.team/docs/drizzle-kit-studio
+
+## Todos
+
+- [ ] Add unit tests
+- [ ] Add more docs ( like how to activate/use mock users )
+- [ ] Integrate https://github.com/sadmann7/shadcn-table to have an example
+- [ ] Maybe: Adding a RBAC solution ( maybe via casl? )
+- [ ] Add a contribution guide
+
+## Credits
+
+Without the amazing work of the [T3 OSS Community](https://github.com/t3-oss), this project wouldn't exists.
+
+Also a big thanks to [dBianchii](https://github.com/dBianchii) for his awesome work and help to migrate the auth package ( previously we used V3, now we run "our own" auth package ) and the locales package ( migrating from `next-international` to `next-intl` ).
