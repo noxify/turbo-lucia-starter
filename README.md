@@ -1,4 +1,4 @@
-# t3-turbo-lucia
+# Test
 
 > The stack originates from [create-t3-turbo](https://github.com/t3-oss/create-t3-turbo).
 
