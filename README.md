@@ -41,7 +41,7 @@ This project is a monorepo based on turborepo.
 ├── apps
 │   └── frontend - Contains the logic for the site
 ├── packages
-│   ├── auth - Based on lucia-auth.com / same as we have at itaps monorepo
+│   ├── auth - Based on lucia-auth.com
 │   ├── db - Contains all the database related stuff ( prisma schema, migrations, seeds etc. )
 │   ├── helpers - Helper functions 🤷‍♂️
 │   ├── locales - contains the translations for the `frontend` app
