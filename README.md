@@ -85,10 +85,25 @@ This project is a monorepo based on turborepo.
 ## Todos
 
 - [ ] Add unit tests
-- [ ] Add more docs ( like how to activate/use mock users )
 - [ ] Integrate https://github.com/sadmann7/shadcn-table to have an example
 - [ ] Maybe: Adding a RBAC solution ( maybe via casl? )
 - [ ] Add a contribution guide
+
+## Running playwright tests
+
+We have prepared some simple testcases to test the authentication in the nextjs app.
+
+To make it runable inside a CI or locally, we're using an [oauth mock server](https://github.com/axa-group/oauth2-mock-server) to make it easier to run the tests and ensuring everything works as expected without having to add some magic to bypass the tests.
+
+With this, we automatically test the authentication flow.
+
+By running `pnpm dev`, the oauth mock server will start, too.
+
+You only have to set `OAUTH_MOCK_ENABLED` to `true` in your `.env` file.
+
+Last step is to open a new terminal tab and run `pnpm test:e2e:nextjs` to start the playwright tests.
+
+You can find the complete playwright configuration in `tooling/playwright`.
 
 ## Credits
 
