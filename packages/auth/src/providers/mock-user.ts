@@ -8,7 +8,7 @@ const callbackUrl = env.APPLICATION_URL
 
 const oauthMock = new MockProvider("dummy-client-id", "dummy-client-secret", {
   baseUrl: env.OAUTH_MOCK_ENDPOINT ?? "http://localhost",
-  redirectURI: `${callbackUrl}/api/auth/mock_user/callback`,
+  redirectURI: `${callbackUrl}`,
 })
 
 export const name = "Mock User"

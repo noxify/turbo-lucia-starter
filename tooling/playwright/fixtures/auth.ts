@@ -9,13 +9,13 @@ export class Auth {
   async loginPage() {
     await this.page.goto("/auth")
     await expect(this.page).toHaveURL(/auth/)
-    await expect(this.page).toHaveTitle("itAPS - Sign in")
+    await expect(this.page).toHaveTitle("Acme Inc - Sign in")
   }
 
   async login(user: Providers) {
     await this.page.goto("/")
     await expect(this.page).toHaveURL(/auth/)
-    await expect(this.page).toHaveTitle("itAPS - Sign in")
+    await expect(this.page).toHaveTitle("Acme Inc - Sign in")
 
     const loginButton = this.page.locator(`#${user}`)
 
@@ -24,7 +24,7 @@ export class Auth {
     await this.page.waitForURL("/", { timeout: 5000 })
 
     await expect(this.page).toHaveURL("/")
-    await expect(this.page).toHaveTitle("itAPS - Dashboard")
+    await expect(this.page).toHaveTitle("Acme Inc - Dashboard")
   }
 
   async clearSessionCookie() {

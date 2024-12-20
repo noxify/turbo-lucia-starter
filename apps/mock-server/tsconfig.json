@@ -1,0 +1,16 @@
+{
+  "extends": "@acme/tsconfig/base.json",
+  "compilerOptions": {
+    "lib": ["es2022", "dom", "dom.iterable"],
+    "jsx": "preserve",
+    "typeRoots": ["types"],
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["./src/*"]
+    },
+
+    "module": "esnext"
+  },
+  "include": [".", "dist/types/**/*.ts", "types"],
+  "exclude": ["node_modules"]
+}
