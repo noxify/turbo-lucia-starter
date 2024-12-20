@@ -32,9 +32,8 @@
     "test": "vitest --project=unit",
     "test:ui": "vitest --ui",
     "prune": "turbo prune --docker",
-    "prepare_test": "turbo run build --filter @acme/* --filter !./apps/*",
     "turbo": "turbo",
-    "test:e2e:frontend": "pnpm -F frontend test:e2e",
+    "test:e2e:nextjs": "pnpm -F nextjs test:e2e",
     "playwright:init": "pnpm -F playwright test:init"
   },
   "devDependencies": {
