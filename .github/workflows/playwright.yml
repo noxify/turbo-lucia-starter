@@ -15,7 +15,7 @@ jobs:
       - name: Install Playwright Browsers
         run: pnpm playwright:init
       - name: Run Playwright tests for our nextjs app
-        run: pnpm test:e2e:nextjs
+        run: pnpm test:e2e:nextjs --project=headless
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
