@@ -1,19 +1,12 @@
 import { inspect } from "util"
-import type { LogLayerConfig } from "loglayer"
-import { LoggerType, LogLayer } from "loglayer"
+import { WinstonTransport } from "@loglayer/transport-winston"
+import { ConsoleTransport, LogLayer } from "loglayer"
 import { serializeError } from "serialize-error"
 import { format, transports, createLogger as winstonLogger } from "winston"
 
 import { env } from "./env"
 
 const { combine, errors, timestamp, colorize, splat, printf } = format
-
-type Preset = keyof typeof presets.loggers
-
-interface PresetConfig {
-  default: Preset
-  loggers: Record<string, LogLayerConfig>
-}
 
 const devFormat = combine(
   format((info) => {
@@ -64,38 +57,17 @@ const w = winstonLogger({
   level: env.LOG_LEVEL,
 })
 
-export const presets: PresetConfig = {
-  default: "winston",
-  loggers: {
-    console: {
-      logger: {
-        type: LoggerType.CONSOLE,
-        instance: console,
-      },
-    },
-    winston: {
-      enabled: true,
-      metadata: {
-        fieldName: "metadata",
-      },
-      context: {
-        fieldName: "context",
-      },
-      error: {
-        serializer: serializeError,
-        fieldName: "error",
-      },
-      logger: {
-        instance: w,
-        type: LoggerType.WINSTON,
-      },
-    },
-  },
-}
+export const createLogger = (preset: "console" | "winston" = "winston") => {
+  const presets = [
+    new ConsoleTransport({ logger: console, enabled: preset === "console", id: "console" }),
+    new WinstonTransport({ logger: w, enabled: preset === "winston", id: "winston" }),
+  ]
 
-export const createLogger = (preset?: keyof typeof presets.loggers) => {
-  const logPreset = preset ? presets.loggers[preset] : presets.loggers[presets.default]
-
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  return new LogLayer(logPreset!)
+  return new LogLayer({
+    transport: presets,
+    errorFieldInMetadata: false,
+    metadataFieldName: "metadata",
+    contextFieldName: "context",
+    errorSerializer: serializeError,
+  })
 }

@@ -22,7 +22,7 @@
   },
   "prettier": "@acme/prettier-config",
   "dependencies": {
-    "next-intl": "3.26.2",
+    "next-intl": "3.26.3",
     "react": "19.0.0"
   },
   "devDependencies": {

@@ -21,7 +21,7 @@
     "@acme/prettier-config": "workspace:*",
     "@acme/tailwind-config": "workspace:*",
     "@acme/tsconfig": "workspace:*",
-    "@types/node": "22.10.2",
+    "@types/node": "22.10.5",
     "eslint": "9.17.0",
     "prettier": "3.4.2",
     "tsx": "4.19.2",

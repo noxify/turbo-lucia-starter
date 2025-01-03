@@ -16,7 +16,7 @@
   },
   "prettier": "@acme/prettier-config",
   "dependencies": {
-    "nuqs": "2.2.3"
+    "nuqs": "2.3.0"
   },
   "devDependencies": {
     "@acme/db": "workspace:*",
