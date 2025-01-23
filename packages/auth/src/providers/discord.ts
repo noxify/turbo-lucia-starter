@@ -13,12 +13,15 @@ const discord = new Discord(env.AUTH_DISCORD_ID, env.AUTH_DISCORD_SECRET, callba
 
 export const name = "Discord"
 
-export const getAuthorizationUrl = (state: string) => {
-  return discord.createAuthorizationURL(state, [OAuth2Scopes.Identify, OAuth2Scopes.Email])
+export const getAuthorizationUrl = (state: string, codeVerifier: string | null) => {
+  return discord.createAuthorizationURL(state, codeVerifier, [
+    OAuth2Scopes.Identify,
+    OAuth2Scopes.Email,
+  ])
 }
 
-export const handleCallback = async (code: string) => {
-  const tokens = await discord.validateAuthorizationCode(code)
+export const handleCallback = async (code: string, codeVerifier: string | null) => {
+  const tokens = await discord.validateAuthorizationCode(code, codeVerifier)
 
   const response = await fetch("https://discord.com/api/users/@me", {
     headers: {
