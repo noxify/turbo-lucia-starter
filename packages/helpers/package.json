@@ -16,7 +16,7 @@
   },
   "prettier": "@acme/prettier-config",
   "dependencies": {
-    "isomorphic-dompurify": "2.19.0",
+    "isomorphic-dompurify": "2.20.0",
     "nanoid": "5.0.9",
     "zod": "3.24.1"
   },
@@ -24,12 +24,12 @@
     "@acme/eslint-config": "workspace:*",
     "@acme/prettier-config": "workspace:*",
     "@acme/tsconfig": "workspace:*",
-    "@types/node": "22.10.5",
-    "eslint": "9.17.0",
+    "@types/node": "22.10.9",
+    "eslint": "9.18.0",
     "globby": "14.0.2",
     "msw": "2.7.0",
     "prettier": "3.4.2",
-    "typescript": "5.7.2",
-    "vitest": "2.1.8"
+    "typescript": "5.7.3",
+    "vitest": "3.0.4"
   }
 }
