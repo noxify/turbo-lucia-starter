@@ -17,10 +17,10 @@
   },
   "prettier": "@acme/prettier-config",
   "dependencies": {
-    "@loglayer/transport-winston": "1.0.12",
-    "@t3-oss/env-core": "0.11.1",
+    "@loglayer/transport-winston": "1.0.14",
+    "@t3-oss/env-core": "0.12.0",
     "kleur": "4.1.5",
-    "loglayer": "5.4.1",
+    "loglayer": "5.5.1",
     "serialize-error": "12.0.0",
     "winston": "3.17.0",
     "zod": "3.24.1"
@@ -29,8 +29,8 @@
     "@acme/eslint-config": "workspace:*",
     "@acme/prettier-config": "workspace:*",
     "@acme/tsconfig": "workspace:*",
-    "@types/node": "22.10.9",
-    "eslint": "9.18.0",
+    "@types/node": "22.12.0",
+    "eslint": "9.19.0",
     "globby": "14.0.2",
     "prettier": "3.4.2",
     "typescript": "5.7.3"
