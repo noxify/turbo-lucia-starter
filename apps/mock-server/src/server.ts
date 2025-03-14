@@ -2,7 +2,7 @@ import { OAuth2Server } from "oauth2-mock-server"
 
 import { createLogger } from "@acme/logging"
 
-const logger = createLogger("console")
+const logger = createLogger()
 const server = new OAuth2Server()
 await server.issuer.keys.generate("RS256")
 
