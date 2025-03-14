@@ -15,7 +15,7 @@ export default function AuthorizedLayout({ children }: AuthorizedLayoutProps) {
       <SiteSidebar />
       <SidebarInset>
         <SiteHeader />
-        <div className="h-fit 2xl:container 2xl:px-0">{children}</div>
+        <div className="h-fit 2xl:container 2xl:mx-auto 2xl:px-0">{children}</div>
       </SidebarInset>
     </SidebarProvider>
   )
