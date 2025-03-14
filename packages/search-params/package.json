@@ -16,17 +16,17 @@
   },
   "prettier": "@acme/prettier-config",
   "dependencies": {
-    "nuqs": "2.3.1"
+    "nuqs": "2.4.1"
   },
   "devDependencies": {
     "@acme/db": "workspace:*",
     "@acme/eslint-config": "workspace:*",
     "@acme/prettier-config": "workspace:*",
     "@acme/tsconfig": "workspace:*",
-    "eslint": "9.19.0",
-    "globby": "14.0.2",
-    "prettier": "3.4.2",
-    "typescript": "5.7.3",
-    "vitest": "3.0.4"
+    "eslint": "9.22.0",
+    "globby": "14.1.0",
+    "prettier": "3.5.3",
+    "typescript": "5.8.2",
+    "vitest": "3.0.8"
   }
 }
