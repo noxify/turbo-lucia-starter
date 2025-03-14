@@ -11,7 +11,9 @@ export const oauthAccounts = pgTable(
   {
     providerId: varchar().notNull(),
     providerUserId: varchar().notNull(),
-    userId: uuid().notNull(),
+    userId: uuid()
+      .notNull()
+      .references(() => users.id),
   },
   (t) => [primaryKey({ columns: [t.providerId, t.providerUserId] })],
 )
@@ -24,7 +26,9 @@ export const sessions = pgTable("sessions", {
     withTimezone: true,
     mode: "date",
   }).notNull(),
-  userId: uuid().notNull(),
+  userId: uuid()
+    .notNull()
+    .references(() => users.id),
 })
 
 export type OAuthAccount = typeof oauthAccounts.$inferSelect
