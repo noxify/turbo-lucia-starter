@@ -2,6 +2,7 @@ import { drizzle } from "drizzle-orm/node-postgres"
 
 import { env } from "./env"
 import * as schema from "./schemas"
+import { relations } from "./schemas/relations"
 
 export const db = drizzle({
   connection: {
@@ -13,5 +14,6 @@ export const db = drizzle({
     ssl: false,
   },
   schema,
+  relations,
   casing: "snake_case",
 })
