@@ -38,7 +38,6 @@
     "@acme/eslint-config": "workspace:*",
     "@acme/playwright": "workspace:*",
     "@acme/prettier-config": "workspace:*",
-    "@acme/tailwind-config": "workspace:*",
     "@acme/tsconfig": "workspace:*",
     "@axe-core/playwright": "4.10.1",
     "@types/node": "22.13.10",

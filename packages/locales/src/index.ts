@@ -14,6 +14,6 @@ export type ServerSideT<S extends TranslationKeys = never> = Awaited<
   ReturnType<typeof getTranslations<S>>
 >
 export type ClientSideT<S extends TranslationKeys = never> = ReturnType<typeof useTranslations<S>>
-export type IsomorficT<S extends TranslationKeys = never> = ServerSideT<S> | ClientSideT<S>
+export type IsomorficT<S extends TranslationKeys = never> = ServerSideT<S>
 
 export type Locale = (typeof routing.locales)[number]

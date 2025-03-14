@@ -48,9 +48,6 @@ importers:
       '@acme/prettier-config':
         specifier: workspace:*
         version: link:../../tooling/prettier
-      '@acme/tailwind-config':
-        specifier: workspace:*
-        version: link:../../tooling/tailwind
       '@acme/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
@@ -124,9 +121,6 @@ importers:
       '@acme/prettier-config':
         specifier: workspace:*
         version: link:../../tooling/prettier
-      '@acme/tailwind-config':
-        specifier: workspace:*
-        version: link:../../tooling/tailwind
       '@acme/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
@@ -350,9 +344,6 @@ importers:
       '@acme/prettier-config':
         specifier: workspace:*
         version: link:../../tooling/prettier
-      '@acme/tailwind-config':
-        specifier: workspace:*
-        version: link:../../tooling/tailwind
       '@acme/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
@@ -524,9 +515,6 @@ importers:
       '@acme/prettier-config':
         specifier: workspace:*
         version: link:../../tooling/prettier
-      '@acme/tailwind-config':
-        specifier: workspace:*
-        version: link:../../tooling/tailwind
       '@acme/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
@@ -545,6 +533,9 @@ importers:
       eslint:
         specifier: 9.22.0
         version: 9.22.0(jiti@2.4.2)
+      postcss:
+        specifier: 8.5.3
+        version: 8.5.3
       prettier:
         specifier: 3.5.3
         version: 3.5.3
@@ -652,37 +643,6 @@ importers:
       '@acme/tsconfig':
         specifier: workspace:*
         version: link:../typescript
-      typescript:
-        specifier: 5.8.2
-        version: 5.8.2
-
-  tooling/tailwind:
-    dependencies:
-      postcss:
-        specifier: 8.5.3
-        version: 8.5.3
-      tailwindcss:
-        specifier: 4.0.14
-        version: 4.0.14
-      tailwindcss-animate:
-        specifier: 1.0.7
-        version: 1.0.7(tailwindcss@4.0.14)
-    devDependencies:
-      '@acme/eslint-config':
-        specifier: workspace:*
-        version: link:../eslint
-      '@acme/prettier-config':
-        specifier: workspace:*
-        version: link:../prettier
-      '@acme/tsconfig':
-        specifier: workspace:*
-        version: link:../typescript
-      eslint:
-        specifier: 9.22.0
-        version: 9.22.0(jiti@2.4.2)
-      prettier:
-        specifier: 3.5.3
-        version: 3.5.3
       typescript:
         specifier: 5.8.2
         version: 5.8.2
