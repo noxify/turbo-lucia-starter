@@ -1,6 +1,6 @@
-import { LanguageToggle } from "@acme/ui/language"
-import { SidebarTrigger } from "@acme/ui/sidebar"
-import { ThemeToggle } from "@acme/ui/theme"
+import { LanguageToggle } from "@acme/ui/components/language"
+import { SidebarTrigger } from "@acme/ui/components/sidebar"
+import { ThemeToggle } from "@acme/ui/components/theme"
 
 export function SiteHeader() {
   return (

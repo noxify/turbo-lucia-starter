@@ -1,14 +1,14 @@
 import type { Metadata, Viewport } from "next"
 import { NuqsAdapter } from "nuqs/adapters/next/app"
 
-import { cn } from "@acme/ui"
-import { ThemeProvider } from "@acme/ui/theme"
-import { Toaster } from "@acme/ui/toaster"
+import { ThemeProvider } from "@acme/ui/components/theme"
+import { Toaster } from "@acme/ui/components/toaster"
+import { cn } from "@acme/ui/lib/utils"
 
-import "~/app/globals.css"
+import "@acme/ui/globals.css"
 
+import { TailwindIndicator } from "~/components/tailwind-indicator"
 import { env } from "~/env"
-import { TailwindIndicator } from "../components/tailwind-indicator"
 
 export const metadata: Metadata = {
   metadataBase: new URL(env.APPLICATION_URL ?? "http://localhost:3000"),

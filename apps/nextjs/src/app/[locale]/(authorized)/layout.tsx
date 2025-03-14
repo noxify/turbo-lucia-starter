@@ -1,6 +1,6 @@
 import type { ReactNode } from "react"
 
-import { SidebarInset, SidebarProvider } from "@acme/ui/sidebar"
+import { SidebarInset, SidebarProvider } from "@acme/ui/components/sidebar"
 
 import { SiteHeader } from "~/components/header"
 import { SiteSidebar } from "~/components/sidebar"
