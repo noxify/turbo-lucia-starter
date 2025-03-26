@@ -4,7 +4,7 @@ import * as path from "node:path"
 import { includeIgnoreFile } from "@eslint/compat"
 import eslint from "@eslint/js"
 import importPlugin from "eslint-plugin-import"
-import packageJson from "eslint-plugin-package-json/configs/recommended"
+import packageJson from "eslint-plugin-package-json"
 import turboPlugin from "eslint-plugin-turbo"
 import tseslint from "typescript-eslint"
 
@@ -40,10 +40,9 @@ export default tseslint.config(
     // Globally ignored files
     ignores: ["**/*.config.*"],
   },
+  packageJson.configs.recommended,
   {
-    ...packageJson,
     rules: {
-      ...packageJson.rules,
       "package-json/valid-package-def": "off",
     },
   },
