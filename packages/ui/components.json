@@ -4,14 +4,17 @@
   "rsc": true,
   "tsx": true,
   "tailwind": {
-    "config": "./tailwind.config.ts",
-    "css": "../../apps/frontend/src/app/globals.css",
-    "baseColor": "zinc",
+    "config": "",
+    "css": "src/styles/globals.css",
+    "baseColor": "neutral",
     "cssVariables": true
   },
+  "iconLibrary": "lucide",
   "aliases": {
-    "utils": "@acme/ui",
-    "components": "src/",
-    "ui": "src/"
+    "components": "@acme/ui/components",
+    "utils": "@acme/ui/lib/utils",
+    "hooks": "@acme/ui/hooks",
+    "lib": "@acme/ui/lib",
+    "ui": "@acme/ui/components"
   }
 }

@@ -25,21 +25,21 @@
     "@oslojs/encoding": "1.1.0",
     "@oslojs/oauth2": "0.5.0",
     "@t3-oss/env-nextjs": "0.12.0",
-    "arctic": "3.2.1",
-    "next": "15.1.6",
+    "arctic": "3.5.0",
+    "next": "15.2.2",
     "react": "19.0.0",
     "react-dom": "19.0.0",
-    "zod": "3.24.1"
+    "zod": "3.24.2"
   },
   "devDependencies": {
     "@acme/eslint-config": "workspace:*",
     "@acme/prettier-config": "workspace:*",
     "@acme/tsconfig": "workspace:*",
-    "@octokit/types": "13.7.0",
-    "discord-api-types": "0.37.118",
-    "eslint": "9.19.0",
-    "globby": "14.0.2",
-    "prettier": "3.4.2",
-    "typescript": "5.7.3"
+    "@octokit/types": "13.8.0",
+    "discord-api-types": "0.37.119",
+    "eslint": "9.22.0",
+    "globby": "14.1.0",
+    "prettier": "3.5.3",
+    "typescript": "5.8.2"
   }
 }

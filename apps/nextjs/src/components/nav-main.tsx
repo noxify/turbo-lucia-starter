@@ -3,7 +3,11 @@
 import type { LucideIcon } from "lucide-react"
 import { Bot, ChevronRight, SquareTerminal } from "lucide-react"
 
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@acme/ui/collapsible"
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@acme/ui/components/collapsible"
 import {
   SidebarGroup,
   SidebarGroupLabel,
@@ -13,7 +17,7 @@ import {
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
-} from "@acme/ui/sidebar"
+} from "@acme/ui/components/sidebar"
 
 interface NavItem {
   title: string

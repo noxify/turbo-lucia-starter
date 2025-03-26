@@ -1,6 +1,6 @@
 "use client"
 
-import { Button } from "@acme/ui/button"
+import { Button } from "@acme/ui/components/button"
 
 import { logoutAction } from "~/actions/logout"
 

@@ -5,8 +5,8 @@ import { getLocale, getTranslations } from "next-intl/server"
 
 import { auth, providers } from "@acme/auth"
 import { redirect } from "@acme/locales/react"
-import { Alert, AlertDescription, AlertTitle } from "@acme/ui/alert"
-import { Button } from "@acme/ui/button"
+import { Alert, AlertDescription, AlertTitle } from "@acme/ui/components/alert"
+import { Button } from "@acme/ui/components/button"
 
 import Logo from "~/components/logo"
 

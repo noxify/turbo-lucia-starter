@@ -1,4 +1,10 @@
-// eslint-disable-next-line @typescript-eslint/consistent-type-imports
-type Messages = typeof import("@acme/locales/lang/en")
+import type { formats } from "@/i18n/request"
 
-type IntlMessages = Messages
+import type en from "@acme/locales/lang/en"
+
+declare module "next-intl" {
+  interface AppConfig {
+    Messages: typeof en
+    Formats: typeof formats
+  }
+}

@@ -52,7 +52,7 @@ export async function GET(
   }
 
   try {
-    // @TODO: with the current implementation for the mock providers
+    // @NOTE: with the current implementation for the mock providers
     //        we could have `undefined` as value - Currently, i don't care, but we should fix it somehow
 
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion

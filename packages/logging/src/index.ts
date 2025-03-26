@@ -1,6 +1,6 @@
 import { inspect } from "util"
 import { WinstonTransport } from "@loglayer/transport-winston"
-import { ConsoleTransport, LogLayer } from "loglayer"
+import { LogLayer } from "loglayer"
 import { serializeError } from "serialize-error"
 import { format, transports, createLogger as winstonLogger } from "winston"
 
@@ -19,21 +19,50 @@ const devFormat = combine(
   errors({ stack: true }),
   printf(({ timestamp, level, message, ...rest }) => {
     const stripped = Object.assign({}, Object.fromEntries(Object.entries(rest)))
-    const { context, metadata } = Object.assign({ context: {}, metadata: { error: {} } }, stripped)
-    const { error, ...restMetadata } = metadata
+
+    const { context, metadata, err } = Object.assign(
+      { context: {}, metadata: {}, err: {} },
+      stripped,
+    )
+
+    let finalError = err
     const coloredContext = inspect(context, {
       depth: 10,
       showHidden: false,
       colors: true,
       compact: true,
     })
-    const coloredMetadata = inspect(restMetadata, {
+    const coloredMetadata = inspect(metadata, {
       depth: 10,
       showHidden: false,
       colors: true,
       compact: true,
     })
-    const coloredError = inspect(error, {
+
+    if (
+      "code" in err &&
+      [
+        "ETIMEDOUT",
+        "ECONNRESET",
+        "EADDRINUSE",
+        "ECONNREFUSED",
+        "EPIPE",
+        "ENOTFOUND",
+        "ENETUNREACH",
+        "EAI_AGAIN",
+      ].includes(err.code as string)
+    ) {
+      finalError = {
+        success: false,
+        // @ts-expect-error - this is a valid field, but the type is unknown
+        errors: err.message as string,
+        statusCode: err.code,
+        // @ts-expect-error - this is a valid field, but the type is unknown
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+        source: err.options.url,
+      }
+    }
+    const coloredError = inspect(finalError, {
       depth: 10,
       showHidden: false,
       colors: true,
@@ -57,11 +86,8 @@ const w = winstonLogger({
   level: env.LOG_LEVEL,
 })
 
-export const createLogger = (preset: "console" | "winston" = "winston") => {
-  const presets = [
-    new ConsoleTransport({ logger: console, enabled: preset === "console", id: "console" }),
-    new WinstonTransport({ logger: w, enabled: preset === "winston", id: "winston" }),
-  ]
+export const createLogger = () => {
+  const presets = [new WinstonTransport({ logger: w, id: "winston" })]
 
   return new LogLayer({
     transport: presets,

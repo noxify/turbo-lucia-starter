@@ -8,6 +8,20 @@
       "when": 1734358576438,
       "tag": "0000_overjoyed_korath",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1741991240869,
+      "tag": "0001_omniscient_arclight",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1741993528139,
+      "tag": "0002_charming_tarot",
+      "breakpoints": true
     }
   ]
 }

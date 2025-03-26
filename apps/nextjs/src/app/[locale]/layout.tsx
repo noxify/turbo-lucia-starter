@@ -1,6 +1,6 @@
 import type { ReactNode } from "react"
 import { notFound } from "next/navigation"
-import { getLocale, getMessages, getNow, getTimeZone } from "next-intl/server"
+import { getLocale, getNow, getTimeZone } from "next-intl/server"
 
 import { routing } from "@acme/locales/routing"
 
@@ -23,9 +23,8 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
   const currentLocale = await getLocale()
   const now = await getNow()
   const timeZone = await getTimeZone()
-  const messages = await getMessages()
   return (
-    <LocaleProvider messages={messages} locale={currentLocale} now={now} timeZone={timeZone}>
+    <LocaleProvider locale={currentLocale} now={now} timeZone={timeZone}>
       {children}
     </LocaleProvider>
   )

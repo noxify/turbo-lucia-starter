@@ -1,9 +1,6 @@
-import type { NestedKeyOf } from "next-intl"
 import { getRequestConfig } from "next-intl/server"
 
 import { routing } from "@acme/locales/routing"
-
-export type AllowedTranslationKeys = NestedKeyOf<IntlMessages>
 
 export default getRequestConfig(async ({ requestLocale }) => {
   // This typically corresponds to the `[locale]` segment

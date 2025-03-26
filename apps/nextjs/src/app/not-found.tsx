@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 
-import { Button } from "@acme/ui/button"
+import { Button } from "@acme/ui/components/button"
 
 export default function ErrorPage() {
   return (

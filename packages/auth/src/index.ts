@@ -2,9 +2,11 @@ import { cache } from "react"
 import { cookies } from "next/headers"
 import { sha256 } from "@oslojs/crypto/sha2"
 import { encodeBase32LowerCaseNoPadding, encodeHexLowerCase } from "@oslojs/encoding"
+import { eq } from "drizzle-orm"
 
 import type { Session as BaseSession, User as BaseUser, SessionInput } from "@acme/db/schemas"
-import { sessionRepository } from "@acme/db/repositories"
+import { db } from "@acme/db/client"
+import { sessions } from "@acme/db/schemas"
 import { createLogger } from "@acme/logging"
 
 import { env } from "./env"
@@ -71,14 +73,21 @@ export async function createSession(
 
   logger.withMetadata({ sessionId, expiresAt, maxSessionDuration }).debug("Creating new session")
 
-  return await sessionRepository.create({ id: sessionId, userId, expiresAt, ...options })
+  const newSession = (
+    await db
+      .insert(sessions)
+      .values({ id: sessionId, userId, expiresAt, ...options })
+      .returning()
+  )[0]
+
+  return newSession
 }
 
 export async function validateSessionToken(token: string): Promise<AuthResponse> {
   const sessionId = encodeHexLowerCase(sha256(new TextEncoder().encode(token)))
 
-  const result = await sessionRepository.findFirst({
-    where: (session, { eq }) => eq(session.id, sessionId),
+  const result = await db.query.sessions.findFirst({
+    where: { id: { eq: sessionId } },
     with: { user: true },
   })
 
@@ -101,21 +110,22 @@ export async function validateSessionToken(token: string): Promise<AuthResponse>
   }
 
   if (Date.now() >= session.expiresAt.getTime() - calculateDateTime(sessionUpdateAfter).asMs) {
-    session.expiresAt = calculateDateTime(maxSessionDuration).fromNow
-    await sessionRepository.update({
-      where: (t, { eq }) => eq(t.id, session.id),
-      data: {
-        expiresAt: calculateDateTime(maxSessionDuration).fromNow,
-      },
-    })
+    const expiresAt = calculateDateTime(maxSessionDuration).fromNow
+
+    session.expiresAt = expiresAt
+
+    await db.update(sessions).set({ expiresAt }).where(eq(sessions.id, session.id))
   }
 
-  return { session, user: { ...user } }
+  // NOTE: Not sure if there is a better way to tell typescript
+  //       that user is not null without force set the expected type
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  return { session, user: { ...user! } }
 }
 
 export async function invalidateSession(sessionId: string) {
   logger.withContext({ sessionId }).debug("invalidate session")
-  await sessionRepository.delete({ where: (t, { eq }) => eq(t.id, sessionId) })
+  await db.delete(sessions).where(eq(sessions.id, sessionId))
 }
 
 export async function setSessionTokenCookie(token: string, expiresAt: Date) {

@@ -12,7 +12,7 @@ import {
 } from "lucide-react"
 
 import type { auth } from "@acme/auth"
-import { Avatar, AvatarFallback } from "@acme/ui/avatar"
+import { Avatar, AvatarFallback } from "@acme/ui/components/avatar"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,8 +21,13 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@acme/ui/dropdown-menu"
-import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from "@acme/ui/sidebar"
+} from "@acme/ui/components/dropdown-menu"
+import {
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  useSidebar,
+} from "@acme/ui/components/sidebar"
 
 import { logoutAction } from "~/actions/logout"
 
