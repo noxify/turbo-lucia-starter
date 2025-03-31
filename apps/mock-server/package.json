@@ -20,7 +20,7 @@
     "@acme/eslint-config": "workspace:*",
     "@acme/prettier-config": "workspace:*",
     "@acme/tsconfig": "workspace:*",
-    "@types/node": "22.13.13",
+    "@types/node": "22.13.14",
     "eslint": "9.23.0",
     "prettier": "3.5.3",
     "tsx": "4.19.3",

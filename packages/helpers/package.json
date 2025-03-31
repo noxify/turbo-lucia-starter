@@ -24,12 +24,12 @@
     "@acme/eslint-config": "workspace:*",
     "@acme/prettier-config": "workspace:*",
     "@acme/tsconfig": "workspace:*",
-    "@types/node": "22.13.13",
+    "@types/node": "22.13.14",
     "eslint": "9.23.0",
     "globby": "14.1.0",
     "msw": "2.7.3",
     "prettier": "3.5.3",
     "typescript": "5.8.2",
-    "vitest": "3.0.9"
+    "vitest": "3.1.1"
   }
 }
