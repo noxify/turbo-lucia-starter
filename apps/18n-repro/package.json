@@ -1,0 +1,51 @@
+{
+  "name": "i18n-repro",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "pnpm with-env next build",
+    "clean": "git clean -xdf .cache .turbo dist node_modules .next",
+    "clean:cache": "git clean -xdf .cache",
+    "dev": "pnpm with-env next dev",
+    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "lint": "eslint .",
+    "playwright:report": "playwright show-report",
+    "playwright:ui": "playwright test --ui",
+    "start": "pnpm with-env next start",
+    "test:e2e": "pnpm with-env playwright test e2e",
+    "typecheck": "tsc --noEmit",
+    "with-env": "dotenv -e ../../.env --"
+  },
+  "prettier": "@acme/prettier-config",
+  "dependencies": {
+    "@acme/helpers": "workspace:*",
+    "@acme/locales": "workspace:*",
+    "@acme/logging": "workspace:*",
+    "@acme/search-params": "workspace:*",
+    "@acme/ui": "workspace:*",
+    "@t3-oss/env-nextjs": "0.12.0",
+    "lucide-react": "0.485.0",
+    "next": "15.2.4",
+    "next-intl": "4.0.2",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "zod": "3.24.2"
+  },
+  "devDependencies": {
+    "@acme/eslint-config": "workspace:*",
+    "@acme/playwright": "workspace:*",
+    "@acme/prettier-config": "workspace:*",
+    "@acme/tsconfig": "workspace:*",
+    "@axe-core/playwright": "4.10.1",
+    "@types/node": "22.13.14",
+    "@types/react": "19.0.12",
+    "@types/react-dom": "19.0.4",
+    "dotenv-cli": "8.0.0",
+    "eslint": "9.23.0",
+    "playwright": "1.51.1",
+    "prettier": "3.5.3",
+    "tailwindcss": "4.0.17",
+    "typescript": "5.8.2"
+  }
+}

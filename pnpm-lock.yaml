@@ -33,6 +33,88 @@ importers:
         specifier: 3.1.1
         version: 3.1.1(@types/node@22.13.14)(jiti@2.4.2)(jsdom@26.0.0)(lightningcss@1.29.2)(msw@2.7.3(@types/node@22.13.14)(typescript@5.8.2))(tsx@4.19.3)(yaml@2.7.0)
 
+  apps/18n-repro:
+    dependencies:
+      '@acme/helpers':
+        specifier: workspace:*
+        version: link:../../packages/helpers
+      '@acme/locales':
+        specifier: workspace:*
+        version: link:../../packages/locales
+      '@acme/logging':
+        specifier: workspace:*
+        version: link:../../packages/logging
+      '@acme/search-params':
+        specifier: workspace:*
+        version: link:../../packages/search-params
+      '@acme/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
+      '@t3-oss/env-nextjs':
+        specifier: 0.12.0
+        version: 0.12.0(typescript@5.8.2)(zod@3.24.2)
+      lucide-react:
+        specifier: 0.485.0
+        version: 0.485.0(react@19.1.0)
+      next:
+        specifier: 15.2.4
+        version: 15.2.4(@playwright/test@1.51.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      next-intl:
+        specifier: 4.0.2
+        version: 4.0.2(next@15.2.4(@playwright/test@1.51.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)(typescript@5.8.2)
+      react:
+        specifier: 19.1.0
+        version: 19.1.0
+      react-dom:
+        specifier: 19.1.0
+        version: 19.1.0(react@19.1.0)
+      zod:
+        specifier: 3.24.2
+        version: 3.24.2
+    devDependencies:
+      '@acme/eslint-config':
+        specifier: workspace:*
+        version: link:../../tooling/eslint
+      '@acme/playwright':
+        specifier: workspace:*
+        version: link:../../tooling/playwright
+      '@acme/prettier-config':
+        specifier: workspace:*
+        version: link:../../tooling/prettier
+      '@acme/tsconfig':
+        specifier: workspace:*
+        version: link:../../tooling/typescript
+      '@axe-core/playwright':
+        specifier: 4.10.1
+        version: 4.10.1(playwright-core@1.51.1)
+      '@types/node':
+        specifier: 22.13.14
+        version: 22.13.14
+      '@types/react':
+        specifier: 19.0.12
+        version: 19.0.12
+      '@types/react-dom':
+        specifier: 19.0.4
+        version: 19.0.4(@types/react@19.0.12)
+      dotenv-cli:
+        specifier: 8.0.0
+        version: 8.0.0
+      eslint:
+        specifier: 9.23.0
+        version: 9.23.0(jiti@2.4.2)
+      playwright:
+        specifier: 1.51.1
+        version: 1.51.1
+      prettier:
+        specifier: 3.5.3
+        version: 3.5.3
+      tailwindcss:
+        specifier: 4.0.17
+        version: 4.0.17
+      typescript:
+        specifier: 5.8.2
+        version: 5.8.2
+
   apps/mock-server:
     dependencies:
       '@acme/logging':

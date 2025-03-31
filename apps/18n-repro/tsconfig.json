@@ -1,0 +1,26 @@
+{
+  "extends": "@acme/tsconfig/base.json",
+  "compilerOptions": {
+    "lib": ["es2022", "dom", "dom.iterable"],
+    "jsx": "preserve",
+    "typeRoots": ["types"],
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["./src/*"]
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "module": "esnext"
+  },
+  "include": [
+    ".",
+    ".next/types/**/*.ts",
+    "dist/types/**/*.ts",
+    "types",
+    "../../tooling/playwright/fixtures"
+  ],
+  "exclude": ["node_modules", "playwright-report", "playwright-results"]
+}
