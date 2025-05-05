@@ -2,7 +2,7 @@
   "name": "turbo-lucia-starter",
   "private": true,
   "engines": {
-    "node": ">=22.15nvm "
+    "node": ">=22.15"
   },
   "packageManager": "pnpm@10.10.0",
   "scripts": {
