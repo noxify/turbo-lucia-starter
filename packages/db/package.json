@@ -32,27 +32,27 @@
   "prettier": "@acme/prettier-config",
   "dependencies": {
     "@acme/helpers": "workspace:*",
-    "@t3-oss/env-core": "0.12.0",
+    "@t3-oss/env-core": "0.13.4",
     "drizzle-orm": "1.0.0-beta.1-af4c434",
-    "pg": "8.14.1",
-    "zod": "3.24.2"
+    "pg": "8.15.6",
+    "zod": "3.24.4"
   },
   "devDependencies": {
     "@acme/eslint-config": "workspace:*",
     "@acme/prettier-config": "workspace:*",
     "@acme/tsconfig": "workspace:*",
-    "@faker-js/faker": "9.6.0",
-    "@types/node": "22.13.14",
-    "@types/pg": "8.11.11",
+    "@faker-js/faker": "9.7.0",
+    "@types/node": "22.15.3",
+    "@types/pg": "8.11.14",
     "dotenv-cli": "8.0.0",
     "drizzle-kit": "1.0.0-beta.1-af4c434",
     "drizzle-seed": "0.3.1",
-    "eslint": "9.23.0",
+    "eslint": "9.26.0",
     "globby": "14.1.0",
     "prettier": "3.5.3",
-    "tsx": "4.19.3",
-    "type-fest": "4.38.0",
-    "typescript": "5.8.2",
-    "vitest": "3.1.1"
+    "tsx": "4.19.4",
+    "type-fest": "4.40.1",
+    "typescript": "5.8.3",
+    "vitest": "3.1.3"
   }
 }

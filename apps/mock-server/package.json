@@ -14,16 +14,16 @@
   "prettier": "@acme/prettier-config",
   "dependencies": {
     "@acme/logging": "workspace:*",
-    "oauth2-mock-server": "7.2.0"
+    "oauth2-mock-server": "7.2.1"
   },
   "devDependencies": {
     "@acme/eslint-config": "workspace:*",
     "@acme/prettier-config": "workspace:*",
     "@acme/tsconfig": "workspace:*",
-    "@types/node": "22.13.14",
-    "eslint": "9.23.0",
+    "@types/node": "22.15.3",
+    "eslint": "9.26.0",
     "prettier": "3.5.3",
-    "tsx": "4.19.3",
-    "typescript": "5.8.2"
+    "tsx": "4.19.4",
+    "typescript": "5.8.3"
   }
 }

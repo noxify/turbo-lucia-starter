@@ -17,15 +17,15 @@
   },
   "prettier": "@acme/prettier-config",
   "dependencies": {
-    "@playwright/test": "1.51.1"
+    "@playwright/test": "1.52.0"
   },
   "devDependencies": {
     "@acme/auth": "workspace:*",
     "@acme/eslint-config": "workspace:*",
     "@acme/prettier-config": "workspace:*",
     "@acme/tsconfig": "workspace:*",
-    "eslint": "9.23.0",
+    "eslint": "9.26.0",
     "prettier": "3.5.3",
-    "typescript": "5.8.2"
+    "typescript": "5.8.3"
   }
 }
