@@ -2,7 +2,7 @@
 
 ## Requirements
 
-- Node >= 22.11 - https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating
+- Node >= 22.15 - https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating
 - Postgres >= 16 - https://postgresapp.com/
 - pnpm >= 9.15.0 - https://pnpm.io/installation
 
