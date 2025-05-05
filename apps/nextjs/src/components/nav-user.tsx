@@ -10,6 +10,7 @@ import {
   Sparkles,
   UserCircle2,
 } from "lucide-react"
+import { useTranslations } from "next-intl"
 
 import type { auth } from "@acme/auth"
 import { Avatar, AvatarFallback } from "@acme/ui/components/avatar"
@@ -33,6 +34,7 @@ import { logoutAction } from "~/actions/logout"
 
 export function NavUser({ user }: { user: ReturnType<typeof auth> }) {
   const { isMobile } = useSidebar()
+  const t = useTranslations()
 
   const { user: userData } = React.use(user)
 
@@ -103,7 +105,7 @@ export function NavUser({ user }: { user: ReturnType<typeof auth> }) {
               <button className="block w-full">
                 <DropdownMenuItem className="cursor-pointer">
                   <LogOut className="mr-2 size-4" />
-                  Log out
+                  {t("auth.signout")}
                 </DropdownMenuItem>
               </button>
             </form>
