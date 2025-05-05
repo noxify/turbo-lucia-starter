@@ -44,6 +44,7 @@ export default tseslint.config(
   {
     rules: {
       "package-json/valid-package-def": "off",
+      "package-json/require-description": "off",
     },
   },
   {

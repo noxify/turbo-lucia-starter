@@ -16,20 +16,20 @@
   },
   "prettier": "@acme/prettier-config",
   "dependencies": {
-    "isomorphic-dompurify": "2.22.0",
+    "isomorphic-dompurify": "2.24.0",
     "nanoid": "5.1.5",
-    "zod": "3.24.2"
+    "zod": "3.24.4"
   },
   "devDependencies": {
     "@acme/eslint-config": "workspace:*",
     "@acme/prettier-config": "workspace:*",
     "@acme/tsconfig": "workspace:*",
-    "@types/node": "22.13.14",
-    "eslint": "9.23.0",
+    "@types/node": "22.15.3",
+    "eslint": "9.26.0",
     "globby": "14.1.0",
-    "msw": "2.7.3",
+    "msw": "2.7.6",
     "prettier": "3.5.3",
-    "typescript": "5.8.2",
-    "vitest": "3.1.1"
+    "typescript": "5.8.3",
+    "vitest": "3.1.3"
   }
 }

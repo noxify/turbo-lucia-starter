@@ -18,21 +18,21 @@
   "prettier": "@acme/prettier-config",
   "dependencies": {
     "@loglayer/transport-winston": "2.0.4",
-    "@t3-oss/env-core": "0.12.0",
+    "@t3-oss/env-core": "0.13.4",
     "kleur": "4.1.5",
     "loglayer": "6.3.3",
     "serialize-error": "12.0.0",
     "winston": "3.17.0",
-    "zod": "3.24.2"
+    "zod": "3.24.4"
   },
   "devDependencies": {
     "@acme/eslint-config": "workspace:*",
     "@acme/prettier-config": "workspace:*",
     "@acme/tsconfig": "workspace:*",
-    "@types/node": "22.13.14",
-    "eslint": "9.23.0",
+    "@types/node": "22.15.3",
+    "eslint": "9.26.0",
     "globby": "14.1.0",
     "prettier": "3.5.3",
-    "typescript": "5.8.2"
+    "typescript": "5.8.3"
   }
 }

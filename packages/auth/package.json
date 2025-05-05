@@ -24,22 +24,22 @@
     "@oslojs/crypto": "1.0.1",
     "@oslojs/encoding": "1.1.0",
     "@oslojs/oauth2": "0.5.0",
-    "@t3-oss/env-nextjs": "0.12.0",
+    "@t3-oss/env-nextjs": "0.13.4",
     "arctic": "3.6.0",
-    "next": "15.2.4",
+    "next": "15.3.1",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "zod": "3.24.2"
+    "zod": "3.24.4"
   },
   "devDependencies": {
     "@acme/eslint-config": "workspace:*",
     "@acme/prettier-config": "workspace:*",
     "@acme/tsconfig": "workspace:*",
-    "@octokit/types": "13.10.0",
-    "discord-api-types": "0.37.119",
-    "eslint": "9.23.0",
+    "@octokit/types": "14.0.0",
+    "discord-api-types": "0.38.3",
+    "eslint": "9.26.0",
     "globby": "14.1.0",
     "prettier": "3.5.3",
-    "typescript": "5.8.2"
+    "typescript": "5.8.3"
   }
 }

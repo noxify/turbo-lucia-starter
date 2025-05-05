@@ -22,18 +22,18 @@
   },
   "prettier": "@acme/prettier-config",
   "dependencies": {
-    "next-intl": "4.0.2",
+    "next-intl": "4.1.0",
     "react": "19.1.0"
   },
   "devDependencies": {
     "@acme/eslint-config": "workspace:*",
     "@acme/prettier-config": "workspace:*",
     "@acme/tsconfig": "workspace:*",
-    "@types/react": "19.0.12",
-    "eslint": "9.23.0",
-    "nodemon": "3.1.9",
+    "@types/react": "19.1.2",
+    "eslint": "9.26.0",
+    "nodemon": "3.1.10",
     "prettier": "3.5.3",
-    "tsx": "4.19.3",
-    "typescript": "5.8.2"
+    "tsx": "4.19.4",
+    "typescript": "5.8.3"
   }
 }

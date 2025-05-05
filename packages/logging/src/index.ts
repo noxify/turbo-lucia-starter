@@ -80,6 +80,7 @@ const devFormat = combine(
     return `[${timestamp as string}] ${level} - ${message as string}${contextOutput}${metadataOutput}${errorOutput}`
   }),
 )
+
 const w = winstonLogger({
   format: devFormat,
   transports: [new transports.Console()],
